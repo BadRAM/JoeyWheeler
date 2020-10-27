@@ -17,7 +17,6 @@ public class FPSWalk : MonoBehaviour
     [SerializeField] private float height = 2;
     [SerializeField] private float width = 1;
     [SerializeField] private float stepUpDistance = 0.5f;
-    [SerializeField] private float weight = 1;
     private float _cameraHeight;
 
 
@@ -65,8 +64,6 @@ public class FPSWalk : MonoBehaviour
 
     // Boxcast parameters
     private Vector3 _boxCastHalfExtents;
-    private Vector3 _overlapBoxHalfExtents;
-    private Collider[] _results = new Collider[3];
     private int _layerMask;
 
     private void Jump()
@@ -102,7 +99,6 @@ public class FPSWalk : MonoBehaviour
         {
             _skidding = true;
             _rigidbody.velocity = _rigidbody.velocity.normalized * Mathf.Max(walkSpeed, _rigidbody.velocity.magnitude - skidAccel * Time.deltaTime);
-            //Debug.Log("Skidding");
         }
         else
         {
@@ -122,7 +118,7 @@ public class FPSWalk : MonoBehaviour
 
     void AirMovement(Vector3 moveVector3)
     {
-        if (_sliding && (Vector3.Dot(_rigidbody.velocity.normalized, _normal) >= 0))
+        if (_sliding && Vector3.Dot(_rigidbody.velocity.normalized, _normal) >= 0)
         {
             _sliding = false;
             _grounded = false;
@@ -216,13 +212,12 @@ public class FPSWalk : MonoBehaviour
         lookSensitivity = 0.2f;
         // set the boxcast parameters
         _boxCastHalfExtents = new Vector3(width / 2, width / 2, width / 2);
-        _overlapBoxHalfExtents = new Vector3(width / 2, height / 2, width / 2);
     }
 
     // FixedUpdate is called once per physics tick
     void FixedUpdate()
     {
-        //check for a collision with ground, and stop the player if one is detected
+        //check for a collision with ground, and fake a collision if one is detected
         Vector3 center = transform.position + transform.up * (height - width/2);
         Vector3 direction = -transform.up;
         RaycastHit hit;
@@ -239,14 +234,7 @@ public class FPSWalk : MonoBehaviour
         // decide if sliding
         if (didHit)
         {
-            if (hit.transform.CompareTag("FrictionlessTerrain"))
-            {
-                _sliding = true;
-            }
-            else
-            {
-                _sliding = Vector3.Angle(transform.up, hit.normal) > maxSlope;
-            }
+            _sliding = Vector3.Angle(transform.up, hit.normal) > maxSlope;
         }
         else
         {
