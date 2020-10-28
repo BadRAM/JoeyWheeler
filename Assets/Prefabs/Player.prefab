@@ -1239,7 +1239,6 @@ MonoBehaviour:
   LockLook: 0
   footCollisionLayerMask:
   - Terrain
-  - TransparentTerrain
   - PlayerClip
   - Default
   groundedIndicator: {fileID: 0}
