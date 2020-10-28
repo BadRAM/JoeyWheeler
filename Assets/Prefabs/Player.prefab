@@ -1227,18 +1227,13 @@ MonoBehaviour:
   height: 2
   width: 1
   stepUpDistance: 0.5
-  weight: 1
   lookSensitivity: 1
   cameraStepUpSpeed: 10
   walkSpeed: 8
   maxAirSpeed: 1
-  maxSkateSpeed: 1
   acceleration: 75
   skidAccel: 100
-  airStrafeForce: 5
-  skateForce: 5
-  skateBreakawayAccel: 5
-  coyoteSkateFrames: 4
+  airStrafeForce: 25
   maxSlope: 40
   jumpForce: 5.3
   LockLook: 0
@@ -1246,6 +1241,7 @@ MonoBehaviour:
   - Terrain
   - TransparentTerrain
   - PlayerClip
+  - Default
   groundedIndicator: {fileID: 0}
   slidingIndicator: {fileID: 0}
 --- !u!82 &246871620
