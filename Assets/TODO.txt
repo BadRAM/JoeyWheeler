@@ -1,0 +1,17 @@
+TODO:
+
+BADRAM:
+    - Placeholder Fail Screen
+    - program exit path
+    - Settings menu
+    - Boss
+    - Random enemy spawn
+    - New enemy AI
+
+DONE:
+
+BADRAM:
+    - Random spawn
+    - random Teleporter
+    - boss spawn timer
+    

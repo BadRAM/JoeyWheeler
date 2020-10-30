@@ -1,11 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public static class GameInfo
 {
-    public static List<Enemy> Enemies = new List<Enemy>();
-    public static PlayerController Player;
+    public static Player Player;
     public static int Score;
+    public static float TimeToBossSpawn = 180f;
+    public static float RunTime;
+    public static int LevelNumber;
+    public static float Difficulty = 1;
+
+    public static float GetDifficultyModifier()
+    {
+        float timeFactor = RunTime / 180f;
+        float levelFactor = LevelNumber;
+        return (timeFactor + levelFactor) * Difficulty;
+    }
+
+    public static void NewLevel()
+    {
+        LevelNumber++;
+        TimeToBossSpawn += 180f;
+    }
+
+    public static void Reset(float difficulty)
+    {
+        Difficulty = difficulty;
+        TimeToBossSpawn = 180f;
+        LevelNumber = 1;
+        RunTime = 0f;
+        Score = 0;
+    }
 }
 

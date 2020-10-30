@@ -31,11 +31,11 @@ public class ScorePickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Pickup(other.transform.parent.GetComponent<PlayerController>());
+            Pickup(other.transform.parent.GetComponent<Player>());
         }
     }
 
-    private void Pickup(PlayerController p)
+    private void Pickup(Player p)
     {
         p.SwitchWeapon();
         p.IncrementScore();

@@ -27,16 +27,10 @@ public class Enemy : MonoBehaviour
         _AI = GetComponent<EnemyAI>();
         _agent = GetComponent<NavMeshAgent>();
         //_agent.enabled = false;
-        GameInfo.Enemies.Add(this);
     }
 
     private void FixedUpdate()
     {
-        if (!GameInfo.Enemies.Contains(GetComponent<Enemy>()))
-        {
-            GameInfo.Enemies.Add(GetComponent<Enemy>());
-        }
-
         if (Health > 0)
         {
             _AI.AiBehavior();
@@ -60,7 +54,6 @@ public class Enemy : MonoBehaviour
     {
         Health = 0;
         _timeOfDeath = Time.time;
-        GameInfo.Enemies.Remove(this);
         disableOnDeath.SetActive(false);
         enableOnDeath.SetActive(true);
     }

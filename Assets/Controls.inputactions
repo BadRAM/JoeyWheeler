@@ -1,5 +1,5 @@
 {
-    "name": "scb3d",
+    "name": "Controls",
     "maps": [
         {
             "name": "Player",
@@ -33,6 +33,22 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "6e2135c1-a64e-4381-be9a-0c88e8382c81",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AltFire",
+                    "type": "Button",
+                    "id": "d6a2ca50-80db-42e6-b6fd-35b501c2e9c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "744b20b1-5712-48f2-933a-2d10e5ea6063",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -267,6 +283,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21178e42-5e49-435c-932e-c223741c38f7",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2eeedbea-e945-4b7b-b309-839a4d10027c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -770,6 +808,33 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "b979b20f-c0b7-4d66-93bf-1b20cfe985e4",
+            "actions": [
+                {
+                    "name": "Unlock Mouse",
+                    "type": "Button",
+                    "id": "64961902-f44b-4eac-96d7-b87d01a70998",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cd7edd2b-1415-4cb7-a21a-91161994d0e1",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Unlock Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

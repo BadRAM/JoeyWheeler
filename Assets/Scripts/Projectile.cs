@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.transform.CompareTag("Player"))
         {
-            collision.transform.parent.GetComponent<PlayerController>().Hurt(damage);
+            collision.transform.parent.GetComponent<Player>().Hurt(damage);
             playerHit = true;
         }
         

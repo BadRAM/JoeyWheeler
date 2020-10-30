@@ -9,7 +9,6 @@ public class WeaponHitscan : Weapon
 
     protected override void Fire()
     {
-        Debug.Log("Hitscan Firing");
         Vector3 hitpoint = HitScan(Damage, RayCastOrigin.position, RandomSpread(RayCastOrigin.forward, Spread), 10000);
         GameObject beam = Instantiate(Projectile, ProjectileSpawn.position, ProjectileSpawn.rotation);
         beam.GetComponent<Beam>().endPoint = hitpoint;
@@ -24,7 +23,7 @@ public class WeaponHitscan : Weapon
         {
             if (hit.transform.CompareTag("Player"))
             {
-                hit.transform.GetComponentInParent<PlayerController>().Hurt(Damage);
+                hit.transform.GetComponentInParent<Player>().Hurt(Damage);
             }
             
             if (hit.transform.CompareTag("Enemy"))

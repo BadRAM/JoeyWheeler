@@ -47,7 +47,7 @@ public class FPSWalk : MonoBehaviour
     
     // Components
     private Rigidbody _rigidbody;
-    private PlayerController _player;
+    private Player _player;
 
     // Input handling
     private float _cameraX;
@@ -194,7 +194,7 @@ public class FPSWalk : MonoBehaviour
     void Start()
     {
 
-        _player = GetComponent<PlayerController>();
+        _player = GetComponent<Player>();
 
         _layerMask = LayerMask.GetMask(footCollisionLayerMask);
         
@@ -275,6 +275,9 @@ public class FPSWalk : MonoBehaviour
     {
         // update sounds
         //airSound.volume = airSoundVolumeCurve.Evaluate(_rigidbody.velocity.magnitude);
+        
+        Cursor.lockState = CursorLockMode.Locked;
+
 
         if(!LockLook)
         {

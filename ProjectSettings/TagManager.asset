@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - ScorePickupSpawn
+  - UseTarget
   layers:
   - Default
   - TransparentFX

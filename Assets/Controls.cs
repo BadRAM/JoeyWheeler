@@ -49,6 +49,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AltFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6a2ca50-80db-42e6-b6fd-35b501c2e9c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""744b20b1-5712-48f2-933a-2d10e5ea6063"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -280,6 +296,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21178e42-5e49-435c-932e-c223741c38f7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2eeedbea-e945-4b7b-b309-839a4d10027c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -787,6 +825,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""b979b20f-c0b7-4d66-93bf-1b20cfe985e4"",
+            ""actions"": [
+                {
+                    ""name"": ""Unlock Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""64961902-f44b-4eac-96d7-b87d01a70998"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cd7edd2b-1415-4cb7-a21a-91161994d0e1"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unlock Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -858,6 +923,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_AltFire = m_Player.FindAction("AltFire", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -871,6 +938,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_TrackedDeviceSelect = m_UI.FindAction("TrackedDeviceSelect", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_UnlockMouse = m_Debug.FindAction("Unlock Mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -924,6 +994,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_AltFire;
+    private readonly InputAction m_Player_Use;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -932,6 +1004,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @AltFire => m_Wrapper.m_Player_AltFire;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -953,6 +1027,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @AltFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltFire;
+                @AltFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltFire;
+                @AltFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltFire;
+                @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -969,6 +1049,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @AltFire.started += instance.OnAltFire;
+                @AltFire.performed += instance.OnAltFire;
+                @AltFire.canceled += instance.OnAltFire;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -1086,6 +1172,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_UnlockMouse;
+    public struct DebugActions
+    {
+        private @Controls m_Wrapper;
+        public DebugActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @UnlockMouse => m_Wrapper.m_Debug_UnlockMouse;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @UnlockMouse.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnUnlockMouse;
+                @UnlockMouse.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnUnlockMouse;
+                @UnlockMouse.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnUnlockMouse;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @UnlockMouse.started += instance.OnUnlockMouse;
+                @UnlockMouse.performed += instance.OnUnlockMouse;
+                @UnlockMouse.canceled += instance.OnUnlockMouse;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1137,6 +1256,8 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAltFire(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1151,5 +1272,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnTrackedDeviceSelect(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnUnlockMouse(InputAction.CallbackContext context);
     }
 }
