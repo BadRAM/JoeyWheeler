@@ -43,6 +43,5 @@ public class EnemySpawner : MonoBehaviour
     {
         SpawnCountDown = DifficultyFactor; //+ Random.Range(-Randomness, Randomness);
         GameObject e = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count - 1)], transform.position, transform.rotation);
-        e.GetComponent<EnemyAI>().SetWaypoints(_waypoints);
     }
 }

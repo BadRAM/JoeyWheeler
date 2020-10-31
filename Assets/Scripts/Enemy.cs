@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(EnemyAI))]
+[RequireComponent(typeof(AI))]
 public class Enemy : MonoBehaviour
 {
 
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private bool _alive;
     private float _timeOfDeath;
     private EnemyWeapon _weapon;
-    private EnemyAI _AI;
+    private AI _AI;
     private Transform _playerTransform;
     private NavMeshAgent _agent;
     [SerializeField]private GameObject disableOnDeath;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _weapon = GetComponent<EnemyWeapon>();
-        _AI = GetComponent<EnemyAI>();
+        _AI = GetComponent<AI>();
         _agent = GetComponent<NavMeshAgent>();
         //_agent.enabled = false;
     }

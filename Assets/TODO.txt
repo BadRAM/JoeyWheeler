@@ -6,7 +6,7 @@ BADRAM:
     - Settings menu
     - Boss
     - Random enemy spawn
-    - New enemy AI
+    - pause menu
 
 DONE:
 
@@ -14,4 +14,4 @@ BADRAM:
     - Random spawn
     - random Teleporter
     - boss spawn timer
-    
+    - New enemy AI

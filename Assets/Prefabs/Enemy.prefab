@@ -84,11 +84,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 396136062225713862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53da5cf996252e44d9f110611e2bad1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 23d373a5b1d345c4f9a41f4e18c9b555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetRange: 15
-  _waypointRange: 3
+  approachDistance: 10
+  fleeDistance: 0
+  visionRange: 30
+  persistence: 3
+  moveFrequency: 100
+  moveRadius: 5
 --- !u!114 &396136062225713857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +225,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
