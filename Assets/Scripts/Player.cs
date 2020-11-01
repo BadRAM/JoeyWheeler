@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         healthText.text = "Health: " + _health;
-        difficultyText.text = "Difficulty: " + _score;
+        difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
         bossTimerText.text = "Boss spawns in: " + GameInfo.TimeToBossSpawn;
 
         RaycastHit hit;
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         
 
         GameInfo.RunTime += Time.deltaTime;
-        GameInfo.TimeToBossSpawn -= Time.deltaTime;
+        GameInfo.TimeToBossSpawn = Mathf.Max(0, GameInfo.TimeToBossSpawn - Time.deltaTime);
     }
 
     // select a random weapon that is not the currently selected weapon

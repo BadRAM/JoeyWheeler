@@ -859,6 +859,7 @@ MonoBehaviour:
   Randomness: 1
   enemyTypes:
   - {fileID: 396136062225713862, guid: aa605669b2efba24faefeb466e565648, type: 3}
+  boss: {fileID: 522182504910432091, guid: 8bdb43fe847fcde47b68cb6147ffbf58, type: 3}
   Waypoints:
   - {fileID: 1038081508}
   - {fileID: 1514491917}
