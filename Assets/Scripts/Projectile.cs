@@ -69,7 +69,6 @@ public class Projectile : MonoBehaviour
     
     private void Collide (RaycastHit hit)
     {
-        Debug.Log(hit.transform.name);
         bool playerHit = false;
 //        if (collision.transform.CompareTag("Enemy"))
 //        {
@@ -82,9 +81,10 @@ public class Projectile : MonoBehaviour
 //            Debug.Log("hit player");
 //        }
 
-        if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
+        Debug.Log(hit.collider.name);
+        if (hit.collider.GetComponent<Hitbox>() != null)
         {
-            hit.transform.GetComponent<Hitbox>().Hurt(damage);
+            hit.collider.GetComponent<Hitbox>().Hurt(damage);
         }
         
         if (splashRadius > 0)

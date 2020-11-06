@@ -39,7 +39,6 @@ public class EnemySpawner : MonoBehaviour
         if (SpawnTimer <= 10f / GameInfo.GetDifficultyModifier())
         {
             SpawnTimer += Time.deltaTime;
-            Debug.Log(SpawnTimer);
         }
         else
         {
