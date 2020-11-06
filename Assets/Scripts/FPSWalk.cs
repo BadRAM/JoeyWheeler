@@ -275,9 +275,6 @@ public class FPSWalk : MonoBehaviour
     {
         // update sounds
         //airSound.volume = airSoundVolumeCurve.Evaluate(_rigidbody.velocity.magnitude);
-        
-        Cursor.lockState = CursorLockMode.Locked;
-
 
         if(!LockLook)
         {

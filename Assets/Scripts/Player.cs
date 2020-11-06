@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI weaponText;
     [SerializeField] private TextMeshProUGUI bossTimerText;
     [SerializeField] private TextMeshProUGUI interactPrompt;
+    [SerializeField] private Canvas deathScreen;
     [SerializeField] private List<Weapon> weapons;
     [SerializeField] private Transform raycastOrigin;
     private int _weapon;
@@ -52,6 +53,13 @@ public class Player : MonoBehaviour
         }
 
         weapons[0].enabled = true;
+
+        deathScreen.enabled = false;
+
+        Time.timeScale = 1;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     // Update is called once per frame
@@ -99,9 +107,12 @@ public class Player : MonoBehaviour
     {
         _health -= damage;
         
-        if (_health <= 0)
+        if (_health < 0)
         {
-            //Die, I guess?
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            deathScreen.enabled = true;
+            _walker.LockLook = true;
         }
     }
 
