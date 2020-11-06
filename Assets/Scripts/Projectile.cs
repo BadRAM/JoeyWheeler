@@ -67,22 +67,29 @@ public class Projectile : MonoBehaviour
         }
     }
     
-    private void Collide (RaycastHit collision)
+    private void Collide (RaycastHit hit)
     {
+        Debug.Log(hit.transform.name);
         bool playerHit = false;
-        if (collision.transform.CompareTag("Enemy"))
+//        if (collision.transform.CompareTag("Enemy"))
+//        {
+//            collision.transform.parent.GetComponent<Enemy>().Hurt(damage);
+//        }
+//        else if (collision.transform.CompareTag("Player"))
+//        {
+//            collision.transform.parent.GetComponent<Player>().Hurt(damage);
+//            playerHit = true;
+//            Debug.Log("hit player");
+//        }
+
+        if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
         {
-            collision.transform.parent.GetComponent<Enemy>().Hurt(damage);
-        }
-        else if (collision.transform.CompareTag("Player"))
-        {
-            collision.transform.parent.GetComponent<Player>().Hurt(damage);
-            playerHit = true;
+            hit.transform.GetComponent<Hitbox>().Hurt(damage);
         }
         
         if (splashRadius > 0)
         {
-            Explode(collision.transform.GetComponent<Enemy>(), playerHit);
+            Explode(hit.transform.GetComponent<Enemy>(), playerHit);
         }
 
         _alive = false;

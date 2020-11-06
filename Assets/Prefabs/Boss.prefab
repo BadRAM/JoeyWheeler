@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 8986675796505307330}
   - component: {fileID: 5269869520533885411}
   - component: {fileID: 6442735765315902927}
+  - component: {fileID: 5089591502247022498}
   m_Layer: 15
   m_Name: DisableOnDeath
   m_TagString: Enemy
@@ -231,6 +232,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &5089591502247022498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491551241623976675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2892cb1225672c144a49fba83a86ef71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 522182504910432093}
+  trigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3696871522012075830
 GameObject:
   m_ObjectHideFlags: 0
