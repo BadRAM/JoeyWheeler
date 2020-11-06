@@ -1,8 +1,6 @@
 TODO:
 
 BADRAM:
-    - Placeholder Fail Screen
-    - program exit path
     - Settings menu
     - pause menu
 
@@ -16,3 +14,5 @@ BADRAM:
     - Random enemy spawn
     - Boss
     - Fix hitreg bug
+    - program exit path
+    - Placeholder Fail Screen
