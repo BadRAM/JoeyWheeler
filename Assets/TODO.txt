@@ -2,7 +2,6 @@ TODO:
 
 BADRAM:
     - Settings menu
-    - pause menu
 
 DONE:
 
@@ -16,3 +15,5 @@ BADRAM:
     - Fix hitreg bug
     - program exit path
     - Placeholder Fail Screen
+    - pause menu
+

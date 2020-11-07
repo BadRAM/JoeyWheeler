@@ -81,7 +81,6 @@ public class Projectile : MonoBehaviour
 //            Debug.Log("hit player");
 //        }
 
-        Debug.Log(hit.collider.name);
         if (hit.collider.GetComponent<Hitbox>() != null)
         {
             hit.collider.GetComponent<Hitbox>().Hurt(damage);

@@ -15,11 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossTimerText;
     [SerializeField] private TextMeshProUGUI interactPrompt;
     [SerializeField] private Canvas deathScreen;
+    [SerializeField] private Canvas pauseScreen;
     [SerializeField] private List<Weapon> weapons;
     [SerializeField] private Transform raycastOrigin;
     private int _weapon;
     private float _health;
     private int _score;
+    private bool _paused;
 
     private FPSWalk _walker;
     private Controls _input;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         _input = new Controls();
         _input.Player.Enable();
         _input.Player.Use.performed += ctx => Use();
+        _input.Player.Pause.performed += ctx => TogglePause();
     }
 
     // Start is called before the first frame update
@@ -79,8 +82,39 @@ public class Player : MonoBehaviour
         {
             interactPrompt.text = "";
         }
-        
-        
+
+        if (_paused || _health < 0)
+        {
+            if (_paused)
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                deathScreen.enabled = false;
+                pauseScreen.enabled = true;
+                _walker.LockLook = true;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                deathScreen.enabled = true;
+                pauseScreen.enabled = false;
+                _walker.LockLook = true;
+            }
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            deathScreen.enabled = false;
+            pauseScreen.enabled = false;
+            _walker.LockLook = false;
+        }
+                
+
 
         GameInfo.RunTime += Time.deltaTime;
         GameInfo.TimeToBossSpawn = Mathf.Max(0, GameInfo.TimeToBossSpawn - Time.deltaTime);
@@ -106,14 +140,6 @@ public class Player : MonoBehaviour
     public void Hurt(float damage)
     {
         _health -= damage;
-        
-        if (_health < 0)
-        {
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            deathScreen.enabled = true;
-            _walker.LockLook = true;
-        }
     }
 
     public void IncrementScore()
@@ -131,6 +157,14 @@ public class Player : MonoBehaviour
         return _walker.GetCenter();
     }
 
+    public void TogglePause()
+    {
+        if (_health > 0)
+        {
+            _paused = !_paused;
+        }
+    }
+    
     private void Use()
     {
         RaycastHit hit;
