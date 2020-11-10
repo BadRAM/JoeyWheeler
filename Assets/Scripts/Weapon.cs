@@ -17,11 +17,19 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float Spread;   // the spread angle in degrees
     [SerializeField] private bool Automatic; // whether the player can fire continuously by holding fire
 
+    private Controls _input;
+
+    private void Awake()
+    {
+        _input = new Controls();
+        _input.Player.Enable();
+    }
+
     private void FixedUpdate()
     {
         heat = Mathf.Max(0, heat - Time.deltaTime);
 
-        if (Automatic && Input.GetButton("Fire1"))
+        if (Automatic && _input.Player.Fire.ReadValue<float>() > 0.5f)
         {
             TryFire();
         }
@@ -29,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (!Automatic && Input.GetButtonDown("Fire1"))
+        if (!Automatic && _input.Player.Fire.ReadValue<float>() > 0.5f)
         {
             TryFire();
         }
