@@ -1,7 +1,7 @@
 TODO:
 
 BADRAM:
-    - Settings menu
+    - Add settings menu to pause menu
 
 DONE:
 
@@ -16,4 +16,6 @@ BADRAM:
     - program exit path
     - Placeholder Fail Screen
     - pause menu
+    - Settings menu
+
 

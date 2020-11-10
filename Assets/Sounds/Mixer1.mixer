@@ -17,9 +17,9 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: ea10a6776157c6a4fabf61dfe069f8dd
-    name: buttonVolume
+    name: SFXVol
   - guid: 74199a41c2b283746bc0ae9c23e1016b
-    name: musicVolume
+    name: MusicVol
   m_AudioMixerGroupViews:
   - guids:
     - 7e17e20f5e685d741ba5810464134f7f
@@ -82,7 +82,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ButtonSounds
+  m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 85f5db3556e33a44eb6b5f8831ee189f
   m_Children: []
