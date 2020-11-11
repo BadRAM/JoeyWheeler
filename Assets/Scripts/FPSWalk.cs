@@ -21,7 +21,6 @@ public class FPSWalk : MonoBehaviour
 
 
     [Header("Movement Characteristics")]
-    [SerializeField] private float lookSensitivity = 1f;
     [SerializeField] private float cameraStepUpSpeed = 10f;
     [SerializeField] private float walkSpeed = 8f;
     [SerializeField] private float maxAirSpeed = 1f; // the maximum horizontal speed that the player can reach in the air by pressing directions from stationary. should be ~10% of walk speed.
@@ -209,7 +208,6 @@ public class FPSWalk : MonoBehaviour
         _cameraX = _spawnFacing;
         
         // set the camera sensitivity
-        lookSensitivity = 0.2f;
         // set the boxcast parameters
         _boxCastHalfExtents = new Vector3(width / 2, width / 2, width / 2);
     }
@@ -289,7 +287,7 @@ public class FPSWalk : MonoBehaviour
             }
 
             // rotate the camera
-            _cameraX += Mouse.current.delta.x.ReadValue() * lookSensitivity;// * Time.deltaTime;
+            _cameraX += Mouse.current.delta.x.ReadValue() * SettingsManager.CurrentSettings.Sensitivity;// * Time.deltaTime;
             if (_cameraX > 180)
             {
                 _cameraX -= 360;
@@ -299,7 +297,7 @@ public class FPSWalk : MonoBehaviour
                 _cameraX += 360;
             }
             
-            _cameraY += -Mouse.current.delta.y.ReadValue() * lookSensitivity;// * Time.deltaTime;
+            _cameraY += -Mouse.current.delta.y.ReadValue() * SettingsManager.CurrentSettings.Sensitivity;// * Time.deltaTime;
             _cameraY = Mathf.Clamp(_cameraY, -90, 90);
             
             _rotator.eulerAngles = new Vector2(_rotator.eulerAngles.x, _cameraX);

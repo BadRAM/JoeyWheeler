@@ -3,7 +3,6 @@ TODO:
 BADRAM:
     - Refactor Weapons system to allow for cards
     - Cross level persistence
-    - Add settings menu to pause menu
 
 DONE:
 
@@ -19,5 +18,4 @@ BADRAM:
     - Placeholder Fail Screen
     - pause menu
     - Settings menu
-
-
+    - Add settings menu to pause menu

@@ -91,7 +91,6 @@ public class Player : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 deathScreen.enabled = false;
-                pauseScreen.enabled = true;
                 _walker.LockLook = true;
             }
             else
@@ -100,7 +99,6 @@ public class Player : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 deathScreen.enabled = true;
-                pauseScreen.enabled = false;
                 _walker.LockLook = true;
             }
         }
@@ -110,7 +108,6 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             deathScreen.enabled = false;
-            pauseScreen.enabled = false;
             _walker.LockLook = false;
         }
                 
@@ -162,6 +159,7 @@ public class Player : MonoBehaviour
         if (_health > 0)
         {
             _paused = !_paused;
+            FindObjectOfType<PauseMenu>().SetPaused(_paused);
         }
     }
     
