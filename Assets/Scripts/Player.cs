@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactPrompt;
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas pauseScreen;
-    [SerializeField] private List<Weapon> weapons;
+    [SerializeField] private Weapon weapon;
     [SerializeField] private Transform raycastOrigin;
     private int _weapon;
     private float _health;
@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
         _input.Player.Enable();
         _input.Player.Use.performed += ctx => Use();
         _input.Player.Pause.performed += ctx => TogglePause();
+        _input.Player.Fire.performed += ctx => FirePressed();
+        _input.Player.Fire.canceled += ctx => FireReleased();
+        _input.Player.AltFire.performed += ctx => AltFirePressed();
+        _input.Player.AltFire.canceled += ctx => AltFireReleased();
     }
 
     // Start is called before the first frame update
@@ -49,13 +53,6 @@ public class Player : MonoBehaviour
         
         GameInfo.Player = GetComponent<Player>();
         _health = startingHealth;
-
-        foreach (Weapon weapon in weapons)
-        {
-            weapon.enabled = false;
-        }
-
-        weapons[0].enabled = true;
 
         deathScreen.enabled = false;
 
@@ -117,23 +114,6 @@ public class Player : MonoBehaviour
         GameInfo.TimeToBossSpawn = Mathf.Max(0, GameInfo.TimeToBossSpawn - Time.deltaTime);
     }
 
-    // select a random weapon that is not the currently selected weapon
-    public void SwitchWeapon()
-    {
-        weapons[_weapon].enabled = false;
-        int nextWep = Random.Range(0, weapons.Count - 1);
-        if (nextWep < _weapon)
-        {
-            _weapon = nextWep;
-        }
-        else
-        {
-            _weapon = nextWep + 1;
-        }
-        weapons[_weapon].enabled = true;
-        weaponText.text = weapons[_weapon].GetWeaponName();
-    }
-    
     public void Hurt(float damage)
     {
         _health -= damage;
@@ -162,7 +142,27 @@ public class Player : MonoBehaviour
             FindObjectOfType<PauseMenu>().SetPaused(_paused);
         }
     }
-    
+
+    private void FirePressed()
+    {
+        weapon.FirePressed();
+    }
+
+    private void FireReleased()
+    {
+        weapon.FireReleased();
+    }
+
+    private void AltFirePressed()
+    {
+        weapon.AltFirePressed();
+    }
+
+    private void AltFireReleased()
+    {
+        weapon.AltFireReleased();
+    }
+
     private void Use()
     {
         RaycastHit hit;

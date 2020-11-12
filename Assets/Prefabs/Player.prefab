@@ -535,15 +535,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 798643210336711970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a8b411b5b4e354ea64e178c30e47c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 523ec6e032dcd234d89ece7d6c45444d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Rocket Launcher
-  Projectile: {fileID: 605609145387393398, guid: 39e7a18cf6c6bc44d94b4d77edf25fd5, type: 3}
+  weaponName: 
+  Projectile: {fileID: 0}
   ProjectileSpawn: {fileID: 2047610495624671665}
-  Cooldown: 1
+  Cooldown: 0
+  Automatic: 0
   Spread: 0
-  Automatic: 1
 --- !u!1 &1055296884022826727
 GameObject:
   m_ObjectHideFlags: 0
@@ -5951,10 +5951,7 @@ MonoBehaviour:
   interactPrompt: {fileID: 1951540322}
   deathScreen: {fileID: 1620703891930158281}
   pauseScreen: {fileID: 7205279663198014620}
-  weapons:
-  - {fileID: 292734045}
-  - {fileID: 3578663123298740112}
-  - {fileID: 2098649952}
+  weapon: {fileID: 292734045}
   raycastOrigin: {fileID: 3939286920318349023}
 --- !u!114 &6305157938408369776
 MonoBehaviour:
@@ -5971,7 +5968,6 @@ MonoBehaviour:
   height: 2
   width: 1
   stepUpDistance: 0.5
-  lookSensitivity: 1
   cameraStepUpSpeed: 10
   walkSpeed: 8
   maxAirSpeed: 1
@@ -12661,15 +12657,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7460181588868882478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a8b411b5b4e354ea64e178c30e47c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 523ec6e032dcd234d89ece7d6c45444d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Machine Gun
   Projectile: {fileID: 2026672618947292269, guid: 6f422647fab8e5540aa8f807db2b63d6, type: 3}
   ProjectileSpawn: {fileID: 2047610495624671665}
   Cooldown: 0.1
-  Spread: 3
   Automatic: 1
+  Spread: 10
 --- !u!1 &7669846445773543856
 GameObject:
   m_ObjectHideFlags: 0
@@ -12789,10 +12785,12 @@ MonoBehaviour:
   Projectile: {fileID: 3857458312060013120, guid: b23c03ce30c102b4a89fe6c1010556c6, type: 3}
   ProjectileSpawn: {fileID: 2047610495624671665}
   Cooldown: 0.1
-  Spread: 5
   Automatic: 1
-  RayCastOrigin: {fileID: 3939286920318349023}
+  Spread: 5
+  RaycastOrigin: {fileID: 3939286920318349023}
   Damage: 10
+  RaycastLayerMask:
+  - HitBox
 --- !u!1 &7847350637703209571
 GameObject:
   m_ObjectHideFlags: 0
