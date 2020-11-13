@@ -9,7 +9,7 @@ public class WeaponProjectile : Weapon
     
     [SerializeField] private GameObject Projectile;
     [SerializeField] private float Cooldown; // the time in seconds between shots
-    [SerializeField] private bool Automatic; // whether the player can fire continuously by holding fire
+    [SerializeField] private bool Automatic; // if true, the player can fire continuously by holding fire
     [SerializeField] protected float Spread;   // the spread angle in degrees
 
     private bool _doFire;
@@ -43,7 +43,6 @@ public class WeaponProjectile : Weapon
 
     protected override void Fire()
     {
-        Debug.Log("Firing");
         Ammo--;
         Quaternion aimTarget = Quaternion.LookRotation(RandomSpread(transform.forward, Spread), transform.up);
         Instantiate(Projectile, transform.position, aimTarget);

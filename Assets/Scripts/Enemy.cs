@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(AI))]
+[RequireComponent(typeof(EnemyWeapon))]
 public class Enemy : MonoBehaviour
 {
-
+    [SerializeField] private bool IsBoss;
     [SerializeField] private float Health;
     [SerializeField] private float DeathDuration;
     private bool _alive;
@@ -52,6 +53,10 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        if (IsBoss)
+        {
+            GameInfo.State = GameInfo.GameState.Victory;
+        }
         Health = 0;
         _timeOfDeath = Time.time;
         disableOnDeath.SetActive(false);

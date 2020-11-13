@@ -15,13 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossTimerText;
     [SerializeField] private TextMeshProUGUI interactPrompt;
     [SerializeField] private Canvas deathScreen;
+    [SerializeField] private Canvas winScreen;
     [SerializeField] private Canvas pauseScreen;
     [SerializeField] private GameObject[] weapons;
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private Transform hand;
     private float _health;
     private int _score;
-    private bool _paused;
 
     private Weapon _weapon;
     private Transform _weaponTransform;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         _input = new Controls();
         _input.Player.Enable();
         _input.Player.Use.performed += ctx => Use();
-        _input.Player.Pause.performed += ctx => TogglePause();
+//        _input.Player.Pause.performed += ctx => TogglePause();
         _input.Player.Fire.performed += ctx => FirePressed();
         _input.Player.Fire.canceled += ctx => FireReleased();
         _input.Player.AltFire.performed += ctx => AltFirePressed();
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
         _walker = GetComponent<FPSWalk>();
         
         GameInfo.Player = GetComponent<Player>();
+        GameInfo.State = GameInfo.GameState.Active;
         _health = startingHealth;
 
         deathScreen.enabled = false;
@@ -91,33 +92,49 @@ public class Player : MonoBehaviour
         {
             interactPrompt.text = "";
         }
-
-        if (_paused || _health < 0)
+        
+        // update various aspects of game state.
+        // these are wildly inefficient, and should be changed to only trigger on state change.
+        if (GameInfo.Paused)
         {
-            if (_paused)
-            {
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                deathScreen.enabled = false;
-                _walker.LockLook = true;
-            }
-            else
-            {
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                deathScreen.enabled = true;
-                _walker.LockLook = true;
-            }
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            deathScreen.enabled = false;
+            winScreen.enabled = false;
+            _walker.LockLook = true;
         }
         else
         {
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            deathScreen.enabled = false;
-            _walker.LockLook = false;
+            switch (GameInfo.State)
+            {
+                case GameInfo.GameState.Active:
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    deathScreen.enabled = false;
+                    winScreen.enabled = false;
+                    _walker.LockLook = false;
+                    break;
+                
+                case GameInfo.GameState.Failure:
+                    Time.timeScale = 0;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    deathScreen.enabled = true;
+                    winScreen.enabled = false;
+                    _walker.LockLook = true;
+                    break;
+                
+                case GameInfo.GameState.Victory:
+                    Time.timeScale = 0;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    deathScreen.enabled = false;
+                    winScreen.enabled = true;
+                    _walker.LockLook = true;         
+                    break;
+            }
         }
                 
 
@@ -129,6 +146,11 @@ public class Player : MonoBehaviour
     public void Hurt(float damage)
     {
         _health -= damage;
+
+        if (_health < 0)
+        {
+            GameInfo.State = GameInfo.GameState.Failure;
+        }
     }
 
     public void IncrementScore()
@@ -146,14 +168,13 @@ public class Player : MonoBehaviour
         return _walker.GetCenter();
     }
 
-    public void TogglePause()
-    {
-        if (_health > 0)
-        {
-            _paused = !_paused;
-            FindObjectOfType<PauseMenu>().SetPaused(_paused);
-        }
-    }
+//    public void TogglePause()
+//    {
+//        if (_health > 0)
+//        {
+//            GameInfo.Paused = !GameInfo.Paused;
+//        }
+//    }
 
     private void FirePressed()
     {
