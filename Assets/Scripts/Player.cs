@@ -16,12 +16,15 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactPrompt;
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas pauseScreen;
-    [SerializeField] private Weapon weapon;
+    [SerializeField] private GameObject[] weapons;
     [SerializeField] private Transform raycastOrigin;
-    private int _weapon;
+    [SerializeField] private Transform hand;
     private float _health;
     private int _score;
     private bool _paused;
+
+    private Weapon _weapon;
+    private Transform _weaponTransform;
 
     private FPSWalk _walker;
     private Controls _input;
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
 
+        EquipRandomWeapon();
     }
 
     // Update is called once per frame
@@ -68,6 +72,14 @@ public class Player : MonoBehaviour
         healthText.text = "Health: " + _health;
         difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
         bossTimerText.text = "Boss spawns in: " + GameInfo.TimeToBossSpawn;
+        if (_weapon != null)
+        {
+            weaponText.text = _weapon.GetWeaponName() + ", " + _weapon.Ammo;
+        }
+        else
+        {
+            weaponText.text = "no weapon";
+        }
 
         RaycastHit hit;
         if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f)
@@ -145,22 +157,34 @@ public class Player : MonoBehaviour
 
     private void FirePressed()
     {
-        weapon.FirePressed();
+        if (_weapon != null)
+        {
+            _weapon.FirePressed();
+        }
     }
 
     private void FireReleased()
     {
-        weapon.FireReleased();
+        if (_weapon != null)
+        {
+            _weapon.FireReleased();
+        }
     }
 
     private void AltFirePressed()
     {
-        weapon.AltFirePressed();
+        if (_weapon != null)
+        {
+            _weapon.AltFirePressed();
+        }
     }
 
     private void AltFireReleased()
     {
-        weapon.AltFireReleased();
+        if (_weapon != null)
+        {
+            _weapon.AltFireReleased();
+        }
     }
 
     private void Use()
@@ -171,5 +195,29 @@ public class Player : MonoBehaviour
         {
             hit.transform.GetComponent<UseTarget>().Use();
         }
+    }
+    
+    public void EquipRandomWeapon()
+    {
+        EquipWeapon(weapons[Random.Range(0, weapons.Length)]);
+    }
+
+    private void EquipWeapon(GameObject weapon)
+    {
+        if (_weapon != null)
+        {
+            _weapon.Drop();
+        }
+        _weaponTransform = Instantiate(weapon, hand).transform;
+        _weapon = _weaponTransform.GetComponent<Weapon>();
+        _weapon.SetPlayer(this);
+        _weapon.SetRaycastOrigin(raycastOrigin);
+        weaponText.text = _weapon.name;
+    }
+
+    public void DropWeapon()
+    {
+        _weapon = null;
+        _weaponTransform = null;
     }
 }

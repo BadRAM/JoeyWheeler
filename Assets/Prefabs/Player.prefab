@@ -495,55 +495,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topMenu: {fileID: 7205279663198014620}
   settingsMenu: {fileID: 1793862543673813079}
---- !u!1 &798643210336711970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 738756329018628413}
-  - component: {fileID: 2098649952}
-  m_Layer: 0
-  m_Name: Rocket Launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &738756329018628413
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798643210336711970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6040552125872113087}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2098649952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798643210336711970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523ec6e032dcd234d89ece7d6c45444d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  Projectile: {fileID: 0}
-  ProjectileSpawn: {fileID: 2047610495624671665}
-  Cooldown: 0
-  Automatic: 0
-  Spread: 0
 --- !u!1 &1055296884022826727
 GameObject:
   m_ObjectHideFlags: 0
@@ -5382,39 +5333,6 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
---- !u!1 &2871571260356907771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6040552125872113087}
-  m_Layer: 0
-  m_Name: Weapons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6040552125872113087
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871571260356907771}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 738756329018628413}
-  - {fileID: 986500792405539011}
-  - {fileID: 5962540564973126106}
-  m_Father: {fileID: 3939438554358690637}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3144208195360752256
 GameObject:
   m_ObjectHideFlags: 0
@@ -5709,7 +5627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3395363527183311291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.365, y: -0.51, z: 0}
+  m_LocalPosition: {x: 0.329, y: -0.398, z: 0.418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8180964224090481124}
@@ -5747,7 +5665,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3939438554358690637}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5166799147134963077
 MeshFilter:
@@ -5858,7 +5776,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3939438554358690637}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3944461218933870526
 BoxCollider:
@@ -5906,7 +5824,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3941903303805281415}
-  - {fileID: 6040552125872113087}
   - {fileID: 2136386431723007178}
   - {fileID: 3939172722990946439}
   - {fileID: 82405496172794506}
@@ -5951,8 +5868,12 @@ MonoBehaviour:
   interactPrompt: {fileID: 1951540322}
   deathScreen: {fileID: 1620703891930158281}
   pauseScreen: {fileID: 7205279663198014620}
-  weapon: {fileID: 292734045}
+  weapons:
+  - {fileID: 2671624672970326576, guid: 408683160c8157442ba2728a2955f510, type: 3}
+  - {fileID: 6412085962162050170, guid: b629e2ca8f0374a49968aaaba175ca8b, type: 3}
+  - {fileID: 145035164345357161, guid: 7160bb4df2e5bd54e9c3fee319948cdc, type: 3}
   raycastOrigin: {fileID: 3939286920318349023}
+  hand: {fileID: 2047610495624671665}
 --- !u!114 &6305157938408369776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7395,7 +7316,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3939438554358690637}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4182996826770134026
 ParticleSystem:
@@ -12211,7 +12132,7 @@ Transform:
   - {fileID: 922907822387958963}
   - {fileID: 1793862543673813078}
   m_Father: {fileID: 3939438554358690637}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6904945335927792192
 GameObject:
@@ -12617,55 +12538,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7460181588868882478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 986500792405539011}
-  - component: {fileID: 292734045}
-  m_Layer: 0
-  m_Name: Machine Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &986500792405539011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460181588868882478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6040552125872113087}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &292734045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460181588868882478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523ec6e032dcd234d89ece7d6c45444d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Machine Gun
-  Projectile: {fileID: 2026672618947292269, guid: 6f422647fab8e5540aa8f807db2b63d6, type: 3}
-  ProjectileSpawn: {fileID: 2047610495624671665}
-  Cooldown: 0.1
-  Automatic: 1
-  Spread: 10
 --- !u!1 &7669846445773543856
 GameObject:
   m_ObjectHideFlags: 0
@@ -12738,59 +12610,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1 &7768957440963227504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5962540564973126106}
-  - component: {fileID: 3578663123298740112}
-  m_Layer: 0
-  m_Name: Pulse Laser
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5962540564973126106
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768957440963227504}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6040552125872113087}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3578663123298740112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768957440963227504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f965106254a66b8489dbe39c242b89cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Pulse Laser
-  Projectile: {fileID: 3857458312060013120, guid: b23c03ce30c102b4a89fe6c1010556c6, type: 3}
-  ProjectileSpawn: {fileID: 2047610495624671665}
-  Cooldown: 0.1
-  Automatic: 1
-  Spread: 5
-  RaycastOrigin: {fileID: 3939286920318349023}
-  Damage: 10
-  RaycastLayerMask:
-  - HitBox
 --- !u!1 &7847350637703209571
 GameObject:
   m_ObjectHideFlags: 0

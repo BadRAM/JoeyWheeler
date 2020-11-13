@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,13 +11,18 @@ using Random = UnityEngine.Random;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] private string weaponName;
-    [SerializeField] protected float ammo;
+    public float Ammo;
 
-    protected void FixedUpdate()
+    protected Player player;
+    protected Transform raycastOrigin;
+
+    private bool _dropped;
+
+    protected virtual void FixedUpdate() // remember to call base.FixedUpdate if this is overridden.
     {
-        if (ammo <= 0)
+        if (!_dropped && Ammo <= 0)
         {
-            // drop weapon.
+            Drop();
         }
     }
 
@@ -72,8 +78,31 @@ public abstract class Weapon : MonoBehaviour
         return origin + direction * length;
     }
 
+    public void Drop() // fall to the floor in a comedic fashion
+    {
+        player.DropWeapon();
+        FireReleased();
+        Vector3 parentVel = player.GetComponent<Rigidbody>().velocity;
+        transform.parent = null;
+        Rigidbody r = gameObject.AddComponent<Rigidbody>();
+        r.velocity = parentVel + Vector3.up * 5;
+        SphereCollider s = gameObject.AddComponent<SphereCollider>();
+        s.radius = 0.2f;
+        _dropped = true;
+    }
+
     public string GetWeaponName()
     {
         return weaponName;
+    }
+
+    public void SetPlayer(Player p)
+    {
+        player = p;
+    }
+
+    public void SetRaycastOrigin(Transform rco)
+    {
+        raycastOrigin = rco;
     }
 }

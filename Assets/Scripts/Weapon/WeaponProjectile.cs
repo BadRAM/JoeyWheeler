@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -7,7 +8,6 @@ public class WeaponProjectile : Weapon
 {
     
     [SerializeField] private GameObject Projectile;
-    [SerializeField] private Transform ProjectileSpawn;
     [SerializeField] private float Cooldown; // the time in seconds between shots
     [SerializeField] private bool Automatic; // whether the player can fire continuously by holding fire
     [SerializeField] protected float Spread;   // the spread angle in degrees
@@ -43,9 +43,10 @@ public class WeaponProjectile : Weapon
 
     protected override void Fire()
     {
-        ammo--;
-        Quaternion aimTarget = Quaternion.LookRotation(RandomSpread(ProjectileSpawn.forward, Spread), ProjectileSpawn.up);
-        Instantiate(Projectile, ProjectileSpawn.position, aimTarget);
+        Debug.Log("Firing");
+        Ammo--;
+        Quaternion aimTarget = Quaternion.LookRotation(RandomSpread(transform.forward, Spread), transform.up);
+        Instantiate(Projectile, transform.position, aimTarget);
     }
 
     public override void FirePressed()

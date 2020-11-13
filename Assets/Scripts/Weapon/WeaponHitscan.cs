@@ -6,11 +6,9 @@ using UnityEngine;
 public class WeaponHitscan : Weapon
 {
     [SerializeField] private GameObject Projectile;
-    [SerializeField] private Transform ProjectileSpawn;
     [SerializeField] private float Cooldown; // the time in seconds between shots
     [SerializeField] private bool Automatic; // whether the player can fire continuously by holding fire
     [SerializeField] private float Spread;   // the spread angle in degrees
-    [SerializeField] private Transform RaycastOrigin;
     [SerializeField] private float Damage;   // how much damage a raycast will do
     [SerializeField] private string[] RaycastLayerMask = {"HitBox"};
     
@@ -26,8 +24,9 @@ public class WeaponHitscan : Weapon
         _raycastLayerMask = LayerMask.GetMask(RaycastLayerMask);
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
+        base.FixedUpdate();
         _heat = Mathf.Max(0, _heat - Time.deltaTime);
         if (_doFire)
         {
@@ -50,11 +49,11 @@ public class WeaponHitscan : Weapon
 
     protected override void Fire()
     {
-        ammo--;
-        Vector3 hitpoint = HitScan(Damage, RaycastOrigin.position, RandomSpread(RaycastOrigin.forward, Spread), Mathf.Infinity, _raycastLayerMask);
-        GameObject beam = Instantiate(Projectile, ProjectileSpawn.position, ProjectileSpawn.rotation);
+        Ammo--;
+        Vector3 hitpoint = HitScan(Damage, raycastOrigin.position, RandomSpread(raycastOrigin.forward, Spread), Mathf.Infinity, _raycastLayerMask);
+        GameObject beam = Instantiate(Projectile, transform.position, transform.rotation);
         beam.GetComponent<Beam>().endPoint = hitpoint;
-        beam.GetComponent<Beam>().startPoint = ProjectileSpawn.position;
+        beam.GetComponent<Beam>().startPoint = transform.position;
     }
 
     public override void FirePressed()
