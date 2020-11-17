@@ -6,7 +6,7 @@ TagManager:
   tags:
   - ScorePickupSpawn
   - UseTarget
-  - Enemy
+  - Monster
   layers:
   - Default
   - TransparentFX

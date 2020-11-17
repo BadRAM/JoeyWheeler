@@ -10,7 +10,7 @@ public class FPSWalk : MonoBehaviour
     // this is a First Person movement controller that uses a box collider and a boxcast to interact with map geometry.
     
     //TODO:
-    //fix falling into the floor near tall steps - fixed: ensure that tall steps are not a part of the same collider
+    //fix falling into the floor near tall steps - fixed: ensure that tall steps are not a part of the same mesh collider as floor
     
 
     [Header("Size")]

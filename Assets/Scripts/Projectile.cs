@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+
+// TODO: Refactor this into a pure direct damage projectile class, and shift splash damage and other special properties to child classes.
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 15;
@@ -88,7 +90,7 @@ public class Projectile : MonoBehaviour
         
         if (splashRadius > 0)
         {
-            Explode(hit.transform.GetComponent<Enemy>(), playerHit);
+            Explode(hit.transform.GetComponent<Monster>(), playerHit);
         }
 
         _alive = false;
@@ -111,7 +113,7 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
-    private void Explode(Enemy excludeEnemy, bool excludePlayer)
+    private void Explode(Monster excludeMonster, bool excludePlayer)
     {
         // check line of sight to player
         if (!Physics.Linecast(transform.position, GameInfo.Player.GetCenter(), _layerMaskTerrain))
@@ -126,12 +128,12 @@ public class Projectile : MonoBehaviour
         }
 
 
-        foreach (GameObject i in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (GameObject i in GameObject.FindGameObjectsWithTag("Monster"))
         {
-            Enemy iEnemy = i.GetComponent<Enemy>();
-            if (iEnemy == null ||
-                iEnemy == excludeEnemy ||
-                !i.GetComponent<Enemy>().GetAlive()) 
+            Monster iMonster = i.GetComponent<Monster>();
+            if (iMonster == null ||
+                iMonster == excludeMonster ||
+                !i.GetComponent<Monster>().IsAlive()) 
             {
                 continue;
             }
@@ -140,7 +142,7 @@ public class Projectile : MonoBehaviour
             if (idist < splashRadius &&
                 !Physics.Linecast(transform.position, ipos, _layerMaskTerrain))
             {
-                i.GetComponent<Enemy>().Hurt(damageFalloff(ipos));
+                i.GetComponent<Monster>().Hurt(damageFalloff(ipos));
                 _addExplosionForce(i.GetComponent<Rigidbody>());
             }
         }

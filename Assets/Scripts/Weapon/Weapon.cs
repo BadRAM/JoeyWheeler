@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -69,9 +65,9 @@ public abstract class Weapon : MonoBehaviour
                 hit.transform.GetComponentInParent<Player>().Hurt(damage);
             }
             
-            if (hit.transform.CompareTag("Enemy"))
+            if (hit.transform.CompareTag("Monster"))
             {
-                hit.transform.GetComponentInParent<Enemy>().Hurt(damage);
+                hit.transform.GetComponentInParent<Monster>().Hurt(damage);
             }
             return hit.point;
         }

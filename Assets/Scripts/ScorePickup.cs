@@ -41,7 +41,7 @@ public class ScorePickup : MonoBehaviour
         //        p.IncrementScore();
         
         // randomly select a spawn aside from the current one.
-        int i = Random.Range(0, Spawns.Count);
+        int i = Random.Range(0, Spawns.Count-1);
         if (i >= _currentSpawn)
         {
             i += 1;
@@ -50,7 +50,5 @@ public class ScorePickup : MonoBehaviour
         _currentSpawn = i;
         transform.position = Spawns[_currentSpawn].position;
         transform.rotation = Spawns[_currentSpawn].rotation;
-        
-        Score.Increment(1);
     }
 }

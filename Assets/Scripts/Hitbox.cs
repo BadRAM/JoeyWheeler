@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Hitbox : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private Enemy enemy;
+    [FormerlySerializedAs("enemy")] [SerializeField] private Monster monster;
     [SerializeField] private UnityEvent trigger;
 
     public void Hurt(float damage)
     {
         trigger.Invoke();
         
-        if (enemy != null)
+        if (monster != null)
         {
-            enemy.Hurt(damage);
+            monster.Hurt(damage);
             return;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// converts floats to times. Useful for reporting run times.
 public static class FloatToTime
 {
     public static string Convert(float time)

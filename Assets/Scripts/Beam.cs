@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Visual effect for hitscan/laser weapons.
+// 
+
 public class Beam : MonoBehaviour
 {
     public Vector3 startPoint;

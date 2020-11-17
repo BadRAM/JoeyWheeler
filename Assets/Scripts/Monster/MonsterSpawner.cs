@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+// Placeholder monster spawning script.
+
+public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private float DifficultyFactor;
 
@@ -13,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private float Randomness; //The max amount of time that can be added or subtracted from the spawn time.
 
     private float SpawnTimer;
-    [SerializeField] private List<GameObject> enemyTypes;
+    [FormerlySerializedAs("enemyTypes")] [SerializeField] private List<GameObject> monsterTypes;
     [SerializeField] private GameObject boss;
     [SerializeField] private List<Transform> Waypoints;
     [SerializeField] private List<Vector3> _waypoints;
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             SpawnTimer = 0;
-            SpawnEnemy();
+            SpawnMonster();
         }
 
         if (!_bossSpawned && GameInfo.TimeToBossSpawn <= 0)
@@ -53,9 +56,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy()
+    public void SpawnMonster()
     {
-        GameObject type = enemyTypes[Random.Range(0, enemyTypes.Count - 1)];
+        GameObject type = monsterTypes[Random.Range(0, monsterTypes.Count - 1)];
         Vector3 position = _spawnPoints[Random.Range(0, _spawnPoints.Count - 1)].transform.position;
         GameObject e = Instantiate(type, position, transform.rotation);
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Script for the new game button. Execute Load() to start a new game.
 public class NewGame : MonoBehaviour
 {
     [SerializeField] private string sceneToLoad;

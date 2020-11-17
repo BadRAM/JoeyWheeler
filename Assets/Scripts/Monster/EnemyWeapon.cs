@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Refactor this to allow for animation/state based attack patterns.
+// Will probably be renamed to MonsterAttack, and AI will be able to control multiple attacks.
+
 public class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;

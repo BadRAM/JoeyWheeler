@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// The core monster controller class. All monsters must have a monster script attached to them.
+// It interfaces with an AI script for behaviors, which in turn controls a weapon script which defines it's attack behaviors.
+
 [RequireComponent(typeof(AI))]
 [RequireComponent(typeof(EnemyWeapon))]
-public class Enemy : MonoBehaviour
+public class Monster : MonoBehaviour
 {
+    public int Team = 1;
     [SerializeField] private bool IsBoss;
     [SerializeField] private float Health;
     [SerializeField] private float DeathDuration;
-    private bool _alive;
+    private bool _alive = true;
     private float _timeOfDeath;
     private EnemyWeapon _weapon;
     private AI _AI;
@@ -58,13 +62,19 @@ public class Enemy : MonoBehaviour
             GameInfo.State = GameInfo.GameState.Victory;
         }
         Health = 0;
+        _alive = false;
         _timeOfDeath = Time.time;
         disableOnDeath.SetActive(false);
         enableOnDeath.SetActive(true);
     }
 
-    public bool GetAlive()
+    public bool IsAlive()
     {
         return _alive;
+    }
+
+    public Vector3 GetCenter()
+    {
+        return transform.position + Vector3.up * _agent.height / 2f;
     }
 }

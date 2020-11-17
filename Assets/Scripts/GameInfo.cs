@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Big static class full of shared info about the current game state.
+
 public static class GameInfo
 {
-
-    
     public static Player Player;
     public static int Score;
     public static float TimeToBossSpawn = 10f;

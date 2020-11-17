@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+// Teleports from one level to the next. WIP
+
 public class LevelTeleporter : MonoBehaviour
 {
     [SerializeField] private string sceneToLoad;

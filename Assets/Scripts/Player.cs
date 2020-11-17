@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+// The main player controller class. Handles health, hud, and score, but not movement. Interfaces with weapon scripts in prefabs to attack, and with an FPSWalk for movement.
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 200;
@@ -168,14 +170,6 @@ public class Player : MonoBehaviour
         return _walker.GetCenter();
     }
 
-//    public void TogglePause()
-//    {
-//        if (_health > 0)
-//        {
-//            GameInfo.Paused = !GameInfo.Paused;
-//        }
-//    }
-
     private void FirePressed()
     {
         if (_weapon != null)
@@ -236,6 +230,7 @@ public class Player : MonoBehaviour
         weaponText.text = _weapon.name;
     }
 
+    // clears weapon variables, only meant to be called from Weapon.DropWeapon
     public void DropWeapon()
     {
         _weapon = null;
