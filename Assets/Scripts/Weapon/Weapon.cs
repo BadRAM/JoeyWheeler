@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] private string weaponName;
-    public float Ammo;
+    public float MaxAmmo;
+    [HideInInspector]public float Ammo;
 
     protected Player player;
     protected Transform raycastOrigin;
@@ -95,6 +96,11 @@ public abstract class Weapon : MonoBehaviour
     public void SetPlayer(Player p)
     {
         player = p;
+    }
+
+    public void Reload()
+    {
+        
     }
 
     public void SetRaycastOrigin(Transform rco)

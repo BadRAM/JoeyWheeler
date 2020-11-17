@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Machine Gun
+  MaxAmmo: 50
   Ammo: 50
   Projectile: {fileID: 2026672618947292269, guid: 6f422647fab8e5540aa8f807db2b63d6, type: 3}
   Cooldown: 0.05

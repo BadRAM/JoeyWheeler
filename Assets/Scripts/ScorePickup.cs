@@ -37,7 +37,6 @@ public class ScorePickup : MonoBehaviour
 
     private void Pickup(Player p)
     {
-        p.EquipRandomWeapon();
         //        p.IncrementScore();
         
         // randomly select a spawn aside from the current one.

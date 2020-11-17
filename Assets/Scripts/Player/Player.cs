@@ -26,19 +26,18 @@ public class Player : MonoBehaviour
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas winScreen;
     [SerializeField] private Canvas pauseScreen;
-    [SerializeField] private GameObject[] weapons;
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private Transform hand;
     [SerializeField] private StartingDeck startingDeck;
     [SerializeField] private float drawInterval;
 
-    private Weapon _weapon;
+    [HideInInspector] public Weapon weapon;
     private Transform _weaponTransform;
 
     private FPSWalk _walker;
     private Controls _input;
 
-    private Deck _deck;
+    [HideInInspector] public Deck deck;
 
     private CardSelected _cardSelected;
 
@@ -87,7 +86,7 @@ public class Player : MonoBehaviour
         
         GameInfo.Player = GetComponent<Player>();
         GameInfo.State = GameInfo.GameState.Active;
-        _deck = new Deck(startingDeck.Cards);
+        deck = new Deck(startingDeck.Cards);
         _cardSelected = CardSelected.None;
 
         deathScreen.enabled = false;
@@ -95,28 +94,26 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
         
         Cursor.lockState = CursorLockMode.Locked;
-
-        EquipRandomWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Cards in deck: " + _deck.Undrawn.Count;
+        healthText.text = "Cards in deck: " + deck.Undrawn.Count;
         difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
         bossTimerText.text = "Boss spawns in: " + GameInfo.TimeToBossSpawn;
         drawTimerText.text = "Next card draw in: " + _drawTimer;
 
-        card1Name.text = _deck.GetNameOfCardInHand(0);
-        card2Name.text = _deck.GetNameOfCardInHand(1);
-        card3Name.text = _deck.GetNameOfCardInHand(2);
-        card4Name.text = _deck.GetNameOfCardInHand(3);
-        card5Name.text = _deck.GetNameOfCardInHand(4);
+        card1Name.text = deck.GetNameOfCardInHand(0);
+        card2Name.text = deck.GetNameOfCardInHand(1);
+        card3Name.text = deck.GetNameOfCardInHand(2);
+        card4Name.text = deck.GetNameOfCardInHand(3);
+        card5Name.text = deck.GetNameOfCardInHand(4);
 
         if (_cardSelected != CardSelected.None)
         {
-            selectedCardName.text = _deck.Hand[(int) _cardSelected].Name;
-            selectedCardDescription.text = _deck.Hand[(int) _cardSelected].Description;
+            selectedCardName.text = deck.Hand[(int) _cardSelected].Name;
+            selectedCardDescription.text = deck.Hand[(int) _cardSelected].Description;
         }
         else
         {
@@ -124,9 +121,9 @@ public class Player : MonoBehaviour
             selectedCardDescription.text = "";
         }
         
-        if (_weapon != null)
+        if (weapon != null)
         {
-            weaponText.text = _weapon.GetWeaponName() + ", " + _weapon.Ammo;
+            weaponText.text = weapon.GetWeaponName() + ", " + weapon.Ammo;
         }
         else
         {
@@ -198,7 +195,7 @@ public class Player : MonoBehaviour
     {
         if (_drawTimer <= 0)
         {
-            _deck.Draw(1);
+            deck.Draw(1);
             _drawTimer = drawInterval;
         }
 
@@ -207,7 +204,7 @@ public class Player : MonoBehaviour
 
     public void Hurt(int damage)
     {
-        if (_deck.Damage(damage))
+        if (deck.Damage(damage))
         {
             GameInfo.State = GameInfo.GameState.Failure;
         }
@@ -222,21 +219,21 @@ public class Player : MonoBehaviour
     {
         if (_cardSelected != CardSelected.None)
         {
-            _deck.Hand[(int)_cardSelected].Activate(this, raycastOrigin);
-            _deck.Discard((int)_cardSelected);
+            deck.Hand[(int)_cardSelected].Activate(this, raycastOrigin);
+            deck.Discard((int)_cardSelected);
             _cardSelected = CardSelected.None;
         }
-        else if (_weapon != null)
+        else if (weapon != null)
         {
-            _weapon.FirePressed();
+            weapon.FirePressed();
         }
     }
 
     private void FireReleased()
     {
-        if (_weapon != null)
+        if (weapon != null)
         {
-            _weapon.FireReleased();
+            weapon.FireReleased();
         }
     }
 
@@ -246,17 +243,17 @@ public class Player : MonoBehaviour
         {
             _cardSelected = CardSelected.None;
         }
-        else if (_weapon != null)
+        else if (weapon != null)
         {
-            _weapon.AltFirePressed();
+            weapon.AltFirePressed();
         }
     }
 
     private void AltFireReleased()
     {
-        if (_weapon != null)
+        if (weapon != null)
         {
-            _weapon.AltFireReleased();
+            weapon.AltFireReleased();
         }
     }
 
@@ -293,7 +290,7 @@ public class Player : MonoBehaviour
     {
         if (_cardSelected == CardSelected.None) // select a card when none is currently selected.
         {
-            if (_deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
+            if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
                 _cardSelected = cardNum; // select the card
             }
@@ -305,11 +302,11 @@ public class Player : MonoBehaviour
         else // switch cards by pressing another card's button when a card is selected.
         {
             // switch the cards
-            Card card = _deck.Hand[(int)_cardSelected];
-            _deck.Hand[(int) _cardSelected] = _deck.Hand[(int)cardNum];
-            _deck.Hand[(int)cardNum] = card;
+            Card card = deck.Hand[(int)_cardSelected];
+            deck.Hand[(int) _cardSelected] = deck.Hand[(int)cardNum];
+            deck.Hand[(int)cardNum] = card;
             
-            if (_deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
+            if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
                 _cardSelected = CardSelected.Card1;
             }
@@ -325,29 +322,25 @@ public class Player : MonoBehaviour
             hit.transform.GetComponent<UseTarget>().Use();
         }
     }
-    
-    public void EquipRandomWeapon()
-    {
-        EquipWeapon(weapons[Random.Range(0, weapons.Length)]);
-    }
 
-    private void EquipWeapon(GameObject weapon)
+    public void EquipWeapon(GameObject weapon)
     {
-        if (_weapon != null)
+        if (this.weapon != null)
         {
-            _weapon.Drop();
+            this.weapon.Drop();
         }
         _weaponTransform = Instantiate(weapon, hand).transform;
-        _weapon = _weaponTransform.GetComponent<Weapon>();
-        _weapon.SetPlayer(this);
-        _weapon.SetRaycastOrigin(raycastOrigin);
-        weaponText.text = _weapon.name;
+        this.weapon = _weaponTransform.GetComponent<Weapon>();
+        this.weapon.SetPlayer(this);
+        this.weapon.SetRaycastOrigin(raycastOrigin);
+        this.weapon.Ammo = this.weapon.MaxAmmo;
+        weaponText.text = this.weapon.name;
     }
 
     // clears weapon variables, only meant to be called from Weapon.DropWeapon
     public void DropWeapon()
     {
-        _weapon = null;
+        weapon = null;
         _weaponTransform = null;
     }
 }

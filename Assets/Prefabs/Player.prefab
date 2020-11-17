@@ -6718,8 +6718,9 @@ MonoBehaviour:
   - {fileID: 145035164345357161, guid: 7160bb4df2e5bd54e9c3fee319948cdc, type: 3}
   raycastOrigin: {fileID: 3939286920318349023}
   hand: {fileID: 2047610495624671665}
-  startingDeck: {fileID: 11400000, guid: 72d40093fb9707e488980239249b8b69, type: 2}
+  startingDeck: {fileID: 11400000, guid: 15f625dc4f63d5948b52bd1d6d32c8e5, type: 2}
   drawInterval: 5
+  weapon: {fileID: 0}
 --- !u!114 &6305157938408369776
 MonoBehaviour:
   m_ObjectHideFlags: 0

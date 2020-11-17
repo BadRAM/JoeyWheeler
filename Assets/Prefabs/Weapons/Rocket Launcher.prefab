@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Rocket Launcher
+  MaxAmmo: 5
   Ammo: 10
   Projectile: {fileID: 605609145387393398, guid: 39e7a18cf6c6bc44d94b4d77edf25fd5, type: 3}
   Cooldown: 1

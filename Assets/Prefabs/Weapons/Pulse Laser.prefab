@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Pulse Laser
+  MaxAmmo: 20
   Ammo: 30
   Projectile: {fileID: 3857458312060013120, guid: b23c03ce30c102b4a89fe6c1010556c6, type: 3}
   Cooldown: 0.1

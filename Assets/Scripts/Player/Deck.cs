@@ -13,6 +13,7 @@ public class Deck
     public Deck(List<Card> cards)
     {
         Undrawn = new List<Card>(cards);
+        Undrawn.Shuffle();
         Hand = new Card[5];
         Discards = new List<Card>();
         Debug.Log(Hand[0]);
@@ -37,7 +38,7 @@ public class Deck
     }
 
     // Shuffle discards back into deck
-    public void Return(int num)
+    public void Restore(int num)
     {
         for (int i = 0; i < num; i++)
         {
@@ -48,6 +49,11 @@ public class Deck
                 Undrawn.Insert(y, Discards[x]);
             }
         }
+    }
+
+    public void Shuffle()
+    {
+        Undrawn.Shuffle();
     }
 
     // move a card from the hand to the discards pile.
