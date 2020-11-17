@@ -22,7 +22,7 @@ public class Hitbox : MonoBehaviour
 
         if (player != null)
         {
-            player.Hurt(damage);
+            player.Hurt((int)damage);
         }
     }
 }

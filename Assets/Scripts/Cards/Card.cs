@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public abstract class Card : ScriptableObject
@@ -9,6 +10,7 @@ public abstract class Card : ScriptableObject
     // these are only the fields that ALL cards have.
     public string Name;
     public string Description;
+    public Texture2D Art;
     public CardType Type;
     public CardTier Tier;
 
@@ -18,6 +20,7 @@ public abstract class Card : ScriptableObject
     protected Vector3 _origin;
     protected Vector3 _forward;
     protected Quaternion _direction;
+    protected Transform _parent;
 
     public void Activate(Player caster, Transform origin)
     {
@@ -26,6 +29,7 @@ public abstract class Card : ScriptableObject
         _origin = origin.position;
         _forward = origin.forward;
         _direction = origin.rotation;
+        _parent = origin;
         
         Action();
     }

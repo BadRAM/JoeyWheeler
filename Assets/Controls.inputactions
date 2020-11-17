@@ -60,6 +60,46 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Card1",
+                    "type": "Button",
+                    "id": "adccd4e5-14d7-4054-8e99-4b1c38366745",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Card2",
+                    "type": "Button",
+                    "id": "3c0ffa6c-f40a-49f0-bb4e-a57638a09917",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Card3",
+                    "type": "Button",
+                    "id": "08f7ac1d-a42e-4354-9e77-3e37cb45d85f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Card4",
+                    "type": "Button",
+                    "id": "cd29b378-5b6a-49d3-a5c9-e40995ed5149",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Card5",
+                    "type": "Button",
+                    "id": "d15d4b28-bbcd-4002-af8d-675b8f8ee592",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -324,6 +364,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a129321-f1f1-4983-87be-2cf8b0578bce",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Card1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "368d362b-a63f-4e2a-a8e8-5c7753a178a2",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Card2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e937aa0-92a7-4a3b-a653-44d8f49a7eb9",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Card3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c139dda-66ec-42f2-88da-0420263b4e02",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Card4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfc190dd-1169-4478-9e06-0e4923b6896b",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Card5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

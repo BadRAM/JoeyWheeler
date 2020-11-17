@@ -51,7 +51,7 @@ MonoBehaviour:
   collisionLayerMask:
   - Terrain
   - EnemyHitbox
-  damage: 10
+  damage: 1
   splashRadius: 0
   blastStrength: 0
   lifetime: 15
@@ -133,7 +133,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec739259ec61f5d4ba3ed6d34fd802a6, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

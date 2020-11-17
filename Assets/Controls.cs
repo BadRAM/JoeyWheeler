@@ -73,6 +73,46 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Card1"",
+                    ""type"": ""Button"",
+                    ""id"": ""adccd4e5-14d7-4054-8e99-4b1c38366745"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Card2"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c0ffa6c-f40a-49f0-bb4e-a57638a09917"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Card3"",
+                    ""type"": ""Button"",
+                    ""id"": ""08f7ac1d-a42e-4354-9e77-3e37cb45d85f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Card4"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd29b378-5b6a-49d3-a5c9-e40995ed5149"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Card5"",
+                    ""type"": ""Button"",
+                    ""id"": ""d15d4b28-bbcd-4002-af8d-675b8f8ee592"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -337,6 +377,61 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a129321-f1f1-4983-87be-2cf8b0578bce"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Card1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""368d362b-a63f-4e2a-a8e8-5c7753a178a2"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Card2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e937aa0-92a7-4a3b-a653-44d8f49a7eb9"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Card3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c139dda-66ec-42f2-88da-0420263b4e02"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Card4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfc190dd-1169-4478-9e06-0e4923b6896b"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Card5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -945,6 +1040,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_AltFire = m_Player.FindAction("AltFire", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Card1 = m_Player.FindAction("Card1", throwIfNotFound: true);
+        m_Player_Card2 = m_Player.FindAction("Card2", throwIfNotFound: true);
+        m_Player_Card3 = m_Player.FindAction("Card3", throwIfNotFound: true);
+        m_Player_Card4 = m_Player.FindAction("Card4", throwIfNotFound: true);
+        m_Player_Card5 = m_Player.FindAction("Card5", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1017,6 +1117,11 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_AltFire;
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Card1;
+    private readonly InputAction m_Player_Card2;
+    private readonly InputAction m_Player_Card3;
+    private readonly InputAction m_Player_Card4;
+    private readonly InputAction m_Player_Card5;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1028,6 +1133,11 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @AltFire => m_Wrapper.m_Player_AltFire;
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Card1 => m_Wrapper.m_Player_Card1;
+        public InputAction @Card2 => m_Wrapper.m_Player_Card2;
+        public InputAction @Card3 => m_Wrapper.m_Player_Card3;
+        public InputAction @Card4 => m_Wrapper.m_Player_Card4;
+        public InputAction @Card5 => m_Wrapper.m_Player_Card5;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1058,6 +1168,21 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Card1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard1;
+                @Card1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard1;
+                @Card1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard1;
+                @Card2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard2;
+                @Card2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard2;
+                @Card2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard2;
+                @Card3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard3;
+                @Card3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard3;
+                @Card3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard3;
+                @Card4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard4;
+                @Card4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard4;
+                @Card4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard4;
+                @Card5.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard5;
+                @Card5.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard5;
+                @Card5.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCard5;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1083,6 +1208,21 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Card1.started += instance.OnCard1;
+                @Card1.performed += instance.OnCard1;
+                @Card1.canceled += instance.OnCard1;
+                @Card2.started += instance.OnCard2;
+                @Card2.performed += instance.OnCard2;
+                @Card2.canceled += instance.OnCard2;
+                @Card3.started += instance.OnCard3;
+                @Card3.performed += instance.OnCard3;
+                @Card3.canceled += instance.OnCard3;
+                @Card4.started += instance.OnCard4;
+                @Card4.performed += instance.OnCard4;
+                @Card4.canceled += instance.OnCard4;
+                @Card5.started += instance.OnCard5;
+                @Card5.performed += instance.OnCard5;
+                @Card5.canceled += instance.OnCard5;
             }
         }
     }
@@ -1287,6 +1427,11 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnAltFire(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnCard1(InputAction.CallbackContext context);
+        void OnCard2(InputAction.CallbackContext context);
+        void OnCard3(InputAction.CallbackContext context);
+        void OnCard4(InputAction.CallbackContext context);
+        void OnCard5(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

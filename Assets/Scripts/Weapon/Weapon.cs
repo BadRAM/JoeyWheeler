@@ -62,7 +62,7 @@ public abstract class Weapon : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                hit.transform.GetComponentInParent<Player>().Hurt(damage);
+                hit.transform.GetComponentInParent<Player>().Hurt((int)damage);
             }
             
             if (hit.transform.CompareTag("Monster"))

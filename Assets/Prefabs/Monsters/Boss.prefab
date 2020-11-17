@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Team: 1
   IsBoss: 1
-  Health: 500
+  Health: 50
   DeathDuration: 0
   disableOnDeath: {fileID: 3491551241623976675}
   enableOnDeath: {fileID: 1151926430831919525}

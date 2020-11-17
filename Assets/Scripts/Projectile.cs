@@ -121,31 +121,32 @@ public class Projectile : MonoBehaviour
             // damage the player if the player did not take damage from a direct hit.
             if (!excludePlayer)
             {
-                GameInfo.Player.Hurt(damageFalloff(GameInfo.Player.GetCenter()));
+                GameInfo.Player.Hurt((int)damageFalloff(GameInfo.Player.GetCenter()));
             }
             // push the player either way.
             _addExplosionForce(GameInfo.Player.GetComponent<Rigidbody>());
         }
 
 
-        foreach (GameObject i in GameObject.FindGameObjectsWithTag("Monster"))
-        {
-            Monster iMonster = i.GetComponent<Monster>();
-            if (iMonster == null ||
-                iMonster == excludeMonster ||
-                !i.GetComponent<Monster>().IsAlive()) 
-            {
-                continue;
-            }
-            Vector3 ipos = i.GetComponent<Rigidbody>().centerOfMass + i.transform.position;
-            float idist = Vector3.Distance(transform.position, ipos);
-            if (idist < splashRadius &&
-                !Physics.Linecast(transform.position, ipos, _layerMaskTerrain))
-            {
-                i.GetComponent<Monster>().Hurt(damageFalloff(ipos));
-                _addExplosionForce(i.GetComponent<Rigidbody>());
-            }
-        }
+        // knockback monsters
+        // foreach (GameObject i in GameObject.FindGameObjectsWithTag("Monster"))
+        // {
+        //     Monster iMonster = i.GetComponent<Monster>();
+        //     if (iMonster == null ||
+        //         iMonster == excludeMonster ||
+        //         !i.GetComponent<Monster>().IsAlive()) 
+        //     {
+        //         continue;
+        //     }
+        //     Vector3 ipos = i.GetComponent<Rigidbody>().centerOfMass + i.transform.position;
+        //     float idist = Vector3.Distance(transform.position, ipos);
+        //     if (idist < splashRadius &&
+        //         !Physics.Linecast(transform.position, ipos, _layerMaskTerrain))
+        //     {
+        //         i.GetComponent<Monster>().Hurt(damageFalloff(ipos));
+        //         _addExplosionForce(i.GetComponent<Rigidbody>());
+        //     }
+        // }
     }
 
     private float damageFalloff(Vector3 targetpos)

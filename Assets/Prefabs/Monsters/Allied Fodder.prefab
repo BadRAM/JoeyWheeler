@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: Team
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 396136062225713857, guid: aa605669b2efba24faefeb466e565648, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 2026672618947292269, guid: 6f422647fab8e5540aa8f807db2b63d6, type: 3}
     - target: {fileID: 396136062225713862, guid: aa605669b2efba24faefeb466e565648, type: 3}
       propertyPath: m_Name
       value: Allied Fodder

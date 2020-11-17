@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Simple card, instantiates a prefab.
 
-[CreateAssetMenu(fileName = "NewCard", menuName = "Cards/Spell", order = 1)]
+[CreateAssetMenu(fileName = "NewCard", menuName = "Cards/Spell", order = 10)]
 public class Spell : Card
 {
     public GameObject SpellPrefab;

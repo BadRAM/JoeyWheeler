@@ -131,6 +131,6 @@ MonoBehaviour:
   Cooldown: 0.1
   Automatic: 1
   Spread: 3
-  Damage: 10
+  Damage: 3
   RaycastLayerMask:
   - HitBox
