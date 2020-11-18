@@ -45,7 +45,8 @@ public class WeaponProjectile : Weapon
     {
         Ammo--;
         Quaternion aimTarget = Quaternion.LookRotation(RandomSpread(transform.forward, Spread), transform.up);
-        Instantiate(Projectile, transform.position, aimTarget);
+        GameObject projectile = Instantiate(Projectile, transform.position, aimTarget);
+        projectile.GetComponent<Projectile>().owner = player.gameObject;
     }
 
     public override void FirePressed()

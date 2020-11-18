@@ -10,12 +10,12 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 15;
     public float colliderRadius = 0.1f;
+    [SerializeField] private bool hitAllies;
+    [SerializeField] private bool damageAllies;
     [SerializeField] private string[] collisionLayerMask = new []{"Default"};
     private int _layerMask;
     private int _layerMaskTerrain;
     public float damage;
-    [SerializeField] private float splashRadius;
-    [SerializeField] private float blastStrength;
     private Rigidbody _rigidbody;
     [SerializeField] private float lifetime; // how long to fly before destroying self.
     [SerializeField] private float persistence; // how long to wait after hit before destroying self.
@@ -59,13 +59,22 @@ public class Projectile : MonoBehaviour
 
             if (Physics.SphereCast(_lastpos, colliderRadius, dir, out hit, dist, _layerMask))
             {
-                if (hit.transform.CompareTag("Monster") && hit.transform.GetComponent<Monster>().Team == _team)
+                if (hit.collider.GetComponent<Hitbox>() == null)
                 {
-                    
+                    // move the transform to the appropriate collision position
+                    transform.position = hit.point + transform.forward * -colliderRadius;
+                    Collide(hit);
                 }
-                // move the transform to the appropriate collision position
-                transform.position = hit.point + transform.forward * -colliderRadius;
-                Collide(hit);
+                else
+                {
+                    if (hitAllies || hit.collider.GetComponent<Hitbox>().Team() != _team)
+                    {
+                        // move the transform to the appropriate collision position
+                        transform.position = hit.point + transform.forward * -colliderRadius;
+                        Collide(hit);
+                    }
+
+                }
             }
             _lastpos = transform.position;
             
@@ -87,26 +96,10 @@ public class Projectile : MonoBehaviour
     
     private void Collide (RaycastHit hit)
     {
-        bool playerHit = false;
-//        if (collision.transform.CompareTag("Enemy"))
-//        {
-//            collision.transform.parent.GetComponent<Enemy>().Hurt(damage);
-//        }
-//        else if (collision.transform.CompareTag("Player"))
-//        {
-//            collision.transform.parent.GetComponent<Player>().Hurt(damage);
-//            playerHit = true;
-//            Debug.Log("hit player");
-//        }
 
-        if (hit.collider.GetComponent<Hitbox>() != null)
+        if (hit.collider.GetComponent<Hitbox>() != null && (damageAllies || hit.collider.GetComponent<Hitbox>().Team() != _team))
         {
             hit.collider.GetComponent<Hitbox>().Hurt(damage);
-        }
-        
-        if (splashRadius > 0)
-        {
-            Explode(hit.transform.GetComponent<Monster>(), playerHit);
         }
 
         _alive = false;
@@ -119,7 +112,7 @@ public class Projectile : MonoBehaviour
     
     private void Collide()
     {
-        Explode(null, false);
+        //Explode(null, false);
         
         _alive = false;
         _startTime = Time.time;
@@ -164,17 +157,17 @@ public class Projectile : MonoBehaviour
 //        //     }
 //        // }
 //    }
-
-    private float damageFalloff(Vector3 targetpos)
-    {
-        return Mathf.Max(0, damage * (-(Vector3.Distance(transform.position, targetpos) / splashRadius) + 1));
-    }
-    
-    private void _addExplosionForce(Rigidbody target)
-    {
-        Vector3 delta = (target.centerOfMass + target.transform.position) - transform.position;
-        Vector3 force = delta.normalized * blastStrength * (Mathf.Max(0, splashRadius - delta.magnitude) / splashRadius);
-        target.AddForce(force, ForceMode.VelocityChange);
-        Debug.Log("added force of " + force.magnitude + " from delta of " + delta.magnitude + " and distance factor of " + Mathf.Max(0, splashRadius - delta.magnitude) );
-    }
+//
+//    private float damageFalloff(Vector3 targetpos)
+//    {
+//        return Mathf.Max(0, damage * (-(Vector3.Distance(transform.position, targetpos) / splashRadius) + 1));
+//    }
+//    
+//    private void _addExplosionForce(Rigidbody target)
+//    {
+//        Vector3 delta = (target.centerOfMass + target.transform.position) - transform.position;
+//        Vector3 force = delta.normalized * blastStrength * (Mathf.Max(0, splashRadius - delta.magnitude) / splashRadius);
+//        target.AddForce(force, ForceMode.VelocityChange);
+//        Debug.Log("added force of " + force.magnitude + " from delta of " + delta.magnitude + " and distance factor of " + Mathf.Max(0, splashRadius - delta.magnitude) );
+//    }
 }

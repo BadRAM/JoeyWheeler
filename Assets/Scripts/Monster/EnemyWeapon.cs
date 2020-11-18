@@ -23,8 +23,9 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (_heat == 0)
         {
-            Instantiate(projectile, projectileSpawn.position,
+            GameObject p = Instantiate(projectile, projectileSpawn.position,
                 Quaternion.LookRotation(target - projectileSpawn.position, transform.up));
+            p.GetComponent<Projectile>().owner = gameObject;
             _heat = cooldown;
             return true;
         }
