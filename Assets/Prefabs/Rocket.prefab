@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3866692692878592982}
   - component: {fileID: 3258374162747965897}
   m_Layer: 14
-  m_Name: Rocket 1
+  m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,16 +48,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   colliderRadius: 0.1
+  hitAllies: 0
+  damageAllies: 0
   collisionLayerMask:
   - Terrain
-  - EnemyHitbox
+  - HitBox
   damage: 25
-  splashRadius: 5
-  blastStrength: 20
   lifetime: 15
   persistence: 0
   enableOnDeath: {fileID: 9028440425645508158}
   disableOnDeath: {fileID: 751682705733703056}
+  owner: {fileID: 0}
 --- !u!54 &3258374162747965897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,10 +130,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec739259ec61f5d4ba3ed6d34fd802a6, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

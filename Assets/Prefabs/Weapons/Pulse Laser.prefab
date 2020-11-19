@@ -134,4 +134,5 @@ MonoBehaviour:
   Spread: 3
   Damage: 3
   RaycastLayerMask:
+  - Terrain
   - HitBox

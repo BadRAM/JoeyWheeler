@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform hand;
     [SerializeField] private StartingDeck startingDeck;
     [SerializeField] private float drawInterval;
+    [SerializeField] private SFXPool weaponLoadSound;
+    [SerializeField] private SFXPool cardDrawSound;
+    [SerializeField] private SFXPool cardMoveSound;
 
     [HideInInspector] public Weapon weapon;
     private Transform _weaponTransform;
@@ -196,6 +199,7 @@ public class Player : MonoBehaviour
         if (_drawTimer <= 0)
         {
             deck.Draw(1);
+            cardDrawSound.Play();
             _drawTimer = drawInterval;
         }
 
@@ -293,11 +297,13 @@ public class Player : MonoBehaviour
             if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
                 _cardSelected = cardNum; // select the card
+                cardMoveSound.Play();
             }
         }
         else if (_cardSelected == cardNum) // deselect a card by pressing it's button again.
         {
             _cardSelected = CardSelected.None;
+            cardMoveSound.Play();
         }
         else // switch cards by pressing another card's button when a card is selected.
         {
@@ -310,6 +316,7 @@ public class Player : MonoBehaviour
             {
                 _cardSelected = CardSelected.Card1;
             }
+            cardMoveSound.Play();
         }
     }
 
@@ -323,18 +330,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(GameObject weapon)
+    public void EquipWeapon(GameObject prefab)
     {
-        if (this.weapon != null)
+        if (weapon != null)
         {
-            this.weapon.Drop();
+            weapon.Drop();
         }
-        _weaponTransform = Instantiate(weapon, hand).transform;
-        this.weapon = _weaponTransform.GetComponent<Weapon>();
-        this.weapon.SetPlayer(this);
-        this.weapon.SetRaycastOrigin(raycastOrigin);
-        this.weapon.Ammo = this.weapon.MaxAmmo;
-        weaponText.text = this.weapon.name;
+        _weaponTransform = Instantiate(prefab, hand).transform;
+        weapon = _weaponTransform.GetComponent<Weapon>();
+        weapon.SetPlayer(this);
+        weapon.SetRaycastOrigin(raycastOrigin);
+        weaponText.text = weapon.name;
+        LoadWeapon();
+    }
+
+    public void LoadWeapon()
+    {
+        weapon.Ammo = weapon.MaxAmmo;
+        weaponLoadSound.Play();
     }
 
     // clears weapon variables, only meant to be called from Weapon.DropWeapon

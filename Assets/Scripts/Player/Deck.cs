@@ -16,7 +16,6 @@ public class Deck
         Undrawn.Shuffle();
         Hand = new Card[5];
         Discards = new List<Card>();
-        Debug.Log(Hand[0]);
     }
 
     // Draw num cards to the hand from the top (0) of the undrawn pile.

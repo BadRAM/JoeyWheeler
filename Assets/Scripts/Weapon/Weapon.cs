@@ -55,20 +55,17 @@ public abstract class Weapon : MonoBehaviour
         return dir.normalized;
     }
     
-    protected Vector3 HitScan(float damage, Vector3 origin, Vector3 direction, float length, LayerMask layerMask)
+    // this is a damage dealing raycast which returns the location that it ends.
+    protected Vector3 HitScan(float damage, bool friendlyFire, Vector3 origin, Vector3 direction, float length, LayerMask layerMask)
     {
         //LayerMask layerMask = LayerMask.GetMask("HitBox");
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, length))
         {
-            if (hit.transform.CompareTag("Player"))
+            Hitbox hitbox = hit.collider.GetComponent<Hitbox>();
+            if (hitbox != null && (friendlyFire || hitbox.Team() != 0))
             {
-                hit.transform.GetComponentInParent<Player>().Hurt((int)damage);
-            }
-            
-            if (hit.transform.CompareTag("Monster"))
-            {
-                hit.transform.GetComponentInParent<Monster>().Hurt(damage);
+                hitbox.Hurt(damage);
             }
             return hit.point;
         }

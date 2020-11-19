@@ -11,6 +11,7 @@ public class WeaponHitscan : Weapon
     [SerializeField] private float Spread;   // the spread angle in degrees
     [SerializeField] private float Damage;   // how much damage a raycast will do
     [SerializeField] private string[] RaycastLayerMask = {"HitBox"};
+    [SerializeField] private bool FriendlyFire;
     
     private float _heat;
     
@@ -50,7 +51,7 @@ public class WeaponHitscan : Weapon
     protected override void Fire()
     {
         Ammo--;
-        Vector3 hitpoint = HitScan(Damage, raycastOrigin.position, RandomSpread(raycastOrigin.forward, Spread), Mathf.Infinity, _raycastLayerMask);
+        Vector3 hitpoint = HitScan(Damage, FriendlyFire, raycastOrigin.position, RandomSpread(raycastOrigin.forward, Spread), Mathf.Infinity, _raycastLayerMask);
         GameObject beam = Instantiate(Projectile, transform.position, transform.rotation);
         beam.GetComponent<Beam>().endPoint = hitpoint;
         beam.GetComponent<Beam>().startPoint = transform.position;
