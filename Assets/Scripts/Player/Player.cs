@@ -223,8 +223,9 @@ public class Player : MonoBehaviour
     {
         if (_cardSelected != CardSelected.None)
         {
-            deck.Hand[(int)_cardSelected].Activate(this, raycastOrigin);
+            Card toPlay = deck.Hand[(int) _cardSelected];
             deck.Discard((int)_cardSelected);
+            toPlay.Activate(this, raycastOrigin);
             _cardSelected = CardSelected.None;
         }
         else if (weapon != null)

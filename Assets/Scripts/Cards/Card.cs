@@ -8,8 +8,9 @@ public abstract class Card : ScriptableObject
     // public fields for setting in the editor.
     // these are only the fields that ALL cards have.
     public string Name;
+    public Sprite Art;
     public string Description;
-    public Texture2D Art;
+    public string Fact;
     public CardType Type;
     public CardTier Tier;
 

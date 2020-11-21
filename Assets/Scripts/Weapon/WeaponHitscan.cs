@@ -10,7 +10,7 @@ public class WeaponHitscan : Weapon
     [SerializeField] private bool Automatic; // whether the player can fire continuously by holding fire
     [SerializeField] private float Spread;   // the spread angle in degrees
     [SerializeField] private float Damage;   // how much damage a raycast will do
-    [SerializeField] private string[] RaycastLayerMask = {"HitBox"};
+    [SerializeField] private string[] RaycastLayerMask = {"Terrain", "HitBox"};
     [SerializeField] private bool FriendlyFire;
     
     private float _heat;
