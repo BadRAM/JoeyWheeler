@@ -20,21 +20,18 @@ public class Deck
 
     // Draw num cards to the hand from the top (0) of the undrawn pile.
     // Returns true if successful, even partially, false if no cards were drawn. Will fail if hand is full, or pile is empty. 
-    public bool Draw(int num)
-    {
-        bool didDraw = false;
-        for (int i = 0; i < num; i++)
-        {
-            if (CardsInHand() < 5 && Undrawn.Count > 0)
-            {
-                AddCardToHand(Undrawn[0]);
-                Undrawn.RemoveAt(0);
-                didDraw = true;
-            }
-        }
-
-        return didDraw;
-    }
+//    public Player.CardSlot Draw()
+//    {
+//        bool didDraw = false;
+//        if (CardsInHand() < 5 && Undrawn.Count > 0)
+//        {
+//            Player.CardSlot slot = AddCardToHand(Undrawn[0]);
+//            Undrawn.RemoveAt(0);
+//            return slot;
+//        }
+//
+//        return Player.CardSlot.None;
+//    }
 
     // Shuffle discards back into deck
     public void Restore(int num)
@@ -46,6 +43,7 @@ public class Deck
                 int x = Random.Range(0, Discards.Count);
                 int y = Random.Range(0, Undrawn.Count);
                 Undrawn.Insert(y, Discards[x]);
+                Discards.RemoveAt(x);
             }
         }
     }
@@ -88,17 +86,17 @@ public class Deck
         }
     }
 
-    public bool AddCardToHand(Card toAdd)
+    public Player.CardSlot AddCardToHand(Card toAdd)
     {
         for (int i = 0; i < 5; i++)
         {
             if (Hand[i] == null)
             {
                 Hand[i] = toAdd;
-                return true;
+                return (Player.CardSlot)i;
             }
         }
-        return false;
+        return Player.CardSlot.None;
     }
 
     // Knocks cards out of the player's hand and deck when damage is taken.
@@ -146,6 +144,7 @@ public class Deck
             {
                 return true;
             }
+            Discards.Add(Undrawn[0]);
             Undrawn.RemoveAt(0);
             deckDamage--;
         }

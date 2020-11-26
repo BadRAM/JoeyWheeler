@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 5431948040739437694}
   - component: {fileID: 6568855842213883986}
   - component: {fileID: 8898818915009890664}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: DisableOnDeath
   m_TagString: Monster
   m_Icon: {fileID: 0}

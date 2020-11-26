@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171abe81d656312478f52c83fbd4aef5, type: 3}
   m_Name: Example Card
   m_EditorClassIdentifier: 
-  Name: 
-  Art: {fileID: 0}
-  Description: 
-  Fact: 
-  Type: 0
-  Tier: 0
+  Name: Example Card
+  Art: {fileID: 21300000, guid: 6b2e449932c509741b5af711cbcf624b, type: 3}
+  Description: This card pushes the limits of example cards. Truly exemplary.
+  Fact: This card does not exempt you from any responsibilities.
+  Type: 3
+  Tier: 3
   SpellPrefab: {fileID: 0}

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Machine Gun
   m_EditorClassIdentifier: 
   Name: Machine Gun
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: Get a machine gun
-  Art: {fileID: 0}
+  Fact: 
   Type: 0
   Tier: 0
   weapon: {fileID: 2671624672970326576, guid: 408683160c8157442ba2728a2955f510, type: 3}

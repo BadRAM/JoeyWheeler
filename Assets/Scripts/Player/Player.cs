@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
@@ -11,7 +12,8 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI difficultyText;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI deckText;
+    [SerializeField] private TextMeshProUGUI discardText;
     [SerializeField] private TextMeshProUGUI weaponText;
     [SerializeField] private TextMeshProUGUI bossTimerText;
     [SerializeField] private TextMeshProUGUI drawTimerText;
@@ -19,10 +21,11 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedCardName;
     [SerializeField] private TextMeshProUGUI selectedCardDescription;
     [SerializeField] private TextMeshProUGUI card1Name;
-    [SerializeField] private TextMeshProUGUI card2Name;
+    [SerializeField] private TextMeshProUGUI card2Name; 
     [SerializeField] private TextMeshProUGUI card3Name;
     [SerializeField] private TextMeshProUGUI card4Name;
     [SerializeField] private TextMeshProUGUI card5Name;
+    [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas winScreen;
     [SerializeField] private Canvas pauseScreen;
@@ -42,12 +45,28 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public Deck deck;
 
-    private CardSelected _cardSelected;
+    private CardSlot _cardSlotSelected;
 
     private float _drawTimer;
 
-    private enum CardSelected
+    [HideInInspector] public Transform focusedCardPos;
+    [HideInInspector] public Transform card1Pos;
+    [HideInInspector] public Transform card2Pos;
+    [HideInInspector] public Transform card3Pos;
+    [HideInInspector] public Transform card4Pos;
+    [HideInInspector] public Transform card5Pos;
+    [HideInInspector] public Transform deckPos;
+    [HideInInspector] public Transform discardPos;
+    private GameObject _deckCard;
+    private GameObject _discardCard;
+
+    private CardObject[] _visualHand;
+
+    public enum CardSlot
     {
+        Held = -4,
+        Deck = -3,
+        Discard = -2,
         None = -1,
         Card1 = 0,
         Card2 = 1,
@@ -90,33 +109,116 @@ public class Player : MonoBehaviour
         GameInfo.Player = GetComponent<Player>();
         GameInfo.State = GameInfo.GameState.Active;
         deck = new Deck(startingDeck.Cards);
-        _cardSelected = CardSelected.None;
+        _cardSlotSelected = CardSlot.None;
 
         deathScreen.enabled = false;
 
         Time.timeScale = 1;
         
         Cursor.lockState = CursorLockMode.Locked;
+
+        Camera cam = raycastOrigin.GetComponent<Camera>();
+        
+        focusedCardPos = new GameObject().transform;
+        focusedCardPos.gameObject.name = "FocusedCardPos";
+        focusedCardPos.parent = raycastOrigin;
+        focusedCardPos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.5f, cam.pixelHeight * 0.5f, 0.25f));
+        focusedCardPos.rotation = raycastOrigin.rotation;
+        
+        card1Pos = new GameObject().transform;
+        card1Pos.gameObject.name = "Card1Pos";
+        card1Pos.parent = raycastOrigin;
+        card1Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.2f, cam.pixelHeight * 0.1f, 0.4f));
+        card1Pos.rotation = raycastOrigin.rotation;
+        
+        card2Pos = new GameObject().transform;
+        card2Pos.gameObject.name = "Card2Pos";
+        card2Pos.parent = raycastOrigin;
+        card2Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.35f, cam.pixelHeight * 0.1f, 0.4f));
+        card2Pos.rotation = raycastOrigin.rotation;
+        
+        card3Pos = new GameObject().transform;
+        card3Pos.gameObject.name = "Card3Pos";
+        card3Pos.parent = raycastOrigin;
+        card3Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.5f, cam.pixelHeight * 0.1f, 0.4f));
+        card3Pos.rotation = raycastOrigin.rotation;
+        
+        card4Pos = new GameObject().transform;
+        card4Pos.gameObject.name = "Card4Pos";
+        card4Pos.parent = raycastOrigin;
+        card4Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.65f, cam.pixelHeight * 0.1f, 0.4f));
+        card4Pos.rotation = raycastOrigin.rotation;
+        
+        card5Pos = new GameObject().transform;
+        card5Pos.gameObject.name = "Card5Pos";
+        card5Pos.parent = raycastOrigin;
+        card5Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.8f, cam.pixelHeight * 0.1f, 0.4f));
+        card5Pos.rotation = raycastOrigin.rotation;
+        
+        deckPos = new GameObject().transform;
+        deckPos.gameObject.name = "DeckPos";
+        deckPos.parent = raycastOrigin;
+        deckPos.position = cam.ScreenToWorldPoint(new Vector3( cam.pixelWidth * 0.95f, cam.pixelHeight * 0.1f, 0.5f));
+        deckPos.rotation = Quaternion.LookRotation(-raycastOrigin.forward, raycastOrigin.up);
+        
+        _deckCard = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, deckPos);
+        _deckCard.GetComponent<CardObject>().SetPlayer(this);
+        _deckCard.GetComponent<CardObject>().BeSmall();
+        _deckCard.GetComponent<CardObject>().SetSlot(CardSlot.Deck);
+        
+        discardPos = new GameObject().transform;
+        discardPos.gameObject.name = "DiscardPos";
+        discardPos.parent = raycastOrigin;
+        discardPos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.05f, cam.pixelHeight * 0.1f, 0.5f));
+        discardPos.rotation = Quaternion.LookRotation(-raycastOrigin.forward, raycastOrigin.up);
+        
+        _discardCard = Instantiate(cardPrefab, discardPos.position, discardPos.rotation, discardPos);
+        _discardCard.GetComponent<CardObject>().SetPlayer(this);
+        _discardCard.GetComponent<CardObject>().BeSmall();
+        _discardCard.GetComponent<CardObject>().SetSlot(CardSlot.Discard);
+        
+        _visualHand = new CardObject[5];
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Cards in deck: " + deck.Undrawn.Count;
+        if (deck.Undrawn.Count == 0)
+        {
+            deckText.text = "";
+            _deckCard.SetActive(false);
+        }
+        else
+        {
+            deckText.text = "" + deck.Undrawn.Count;
+            _deckCard.SetActive(true);
+        }
+
+        if (deck.Discards.Count == 0)
+        {
+            discardText.text = "";
+            _discardCard.SetActive(false);
+        }
+        else
+        {
+            discardText.text = "" + deck.Discards.Count;
+            _discardCard.SetActive(true);
+        }
+
         difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
         bossTimerText.text = "Boss spawns in: " + GameInfo.TimeToBossSpawn;
         drawTimerText.text = "Next card draw in: " + _drawTimer;
 
-        card1Name.text = deck.GetNameOfCardInHand(0);
-        card2Name.text = deck.GetNameOfCardInHand(1);
-        card3Name.text = deck.GetNameOfCardInHand(2);
-        card4Name.text = deck.GetNameOfCardInHand(3);
-        card5Name.text = deck.GetNameOfCardInHand(4);
+//        card1Name.text = deck.GetNameOfCardInHand(0);
+//        card2Name.text = deck.GetNameOfCardInHand(1);
+//        card3Name.text = deck.GetNameOfCardInHand(2);
+//        card4Name.text = deck.GetNameOfCardInHand(3);
+//        card5Name.text = deck.GetNameOfCardInHand(4);
 
-        if (_cardSelected != CardSelected.None)
+        if (_cardSlotSelected != CardSlot.None)
         {
-            selectedCardName.text = deck.Hand[(int) _cardSelected].Name;
-            selectedCardDescription.text = deck.Hand[(int) _cardSelected].Description;
+            selectedCardName.text = deck.Hand[(int) _cardSlotSelected].Name;
+            selectedCardDescription.text = deck.Hand[(int) _cardSlotSelected].Description;
         }
         else
         {
@@ -134,8 +236,7 @@ public class Player : MonoBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f)
-            && hit.transform.CompareTag("UseTarget"))
+        if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f, LayerMask.GetMask("UseTarget")))
         {
             interactPrompt.text = hit.transform.GetComponent<UseTarget>().Description();
         }
@@ -198,7 +299,8 @@ public class Player : MonoBehaviour
     {
         if (_drawTimer <= 0)
         {
-            deck.Draw(1);
+            Debug.Log("Drawing.");
+            Draw();
             cardDrawSound.Play();
             _drawTimer = drawInterval;
         }
@@ -212,6 +314,15 @@ public class Player : MonoBehaviour
         {
             GameInfo.State = GameInfo.GameState.Failure;
         }
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (_visualHand[i] != null && deck.Hand[i] == null)
+            {
+                _visualHand[i].SetSlot(CardSlot.Discard);
+                _visualHand[i].Discard();
+            }
+        }
     }
 
     public Vector3 GetCenter()
@@ -221,12 +332,14 @@ public class Player : MonoBehaviour
 
     private void FirePressed()
     {
-        if (_cardSelected != CardSelected.None)
+        if (_cardSlotSelected != CardSlot.None)
         {
-            Card toPlay = deck.Hand[(int) _cardSelected];
-            deck.Discard((int)_cardSelected);
+            Card toPlay = deck.Hand[(int) _cardSlotSelected];
+            deck.Discard((int)_cardSlotSelected);
+            _visualHand[(int)_cardSlotSelected].SetSlot(CardSlot.Discard);
+            _visualHand[(int)_cardSlotSelected].Discard();
             toPlay.Activate(this, raycastOrigin);
-            _cardSelected = CardSelected.None;
+            _cardSlotSelected = CardSlot.None;
         }
         else if (weapon != null)
         {
@@ -244,9 +357,10 @@ public class Player : MonoBehaviour
 
     private void AltFirePressed()
     {
-        if (_cardSelected != CardSelected.None)
+        if (_cardSlotSelected != CardSlot.None)
         {
-            _cardSelected = CardSelected.None;
+            _visualHand[(int)_cardSlotSelected].SetSlot(_cardSlotSelected);
+            _cardSlotSelected = CardSlot.None;
         }
         else if (weapon != null)
         {
@@ -264,70 +378,142 @@ public class Player : MonoBehaviour
 
     private void Card1Pressed()
     {
-        CardPressed(CardSelected.Card1);
+        CardPressed(CardSlot.Card1);
     }
 
     private void Card2Pressed()
     {
-        CardPressed(CardSelected.Card2);
+        CardPressed(CardSlot.Card2);
 
     }
 
     private void Card3Pressed()
     {
-        CardPressed(CardSelected.Card3);
+        CardPressed(CardSlot.Card3);
 
     }
 
     private void Card4Pressed()
     {
-        CardPressed(CardSelected.Card4);
+        CardPressed(CardSlot.Card4);
 
     }
 
     private void Card5Pressed()
     {
-        CardPressed(CardSelected.Card5);
+        CardPressed(CardSlot.Card5);
 
     }
 
-    private void CardPressed(CardSelected cardNum)
+    private void CardPressed(CardSlot cardNum)
     {
-        if (_cardSelected == CardSelected.None) // select a card when none is currently selected.
+        if (_cardSlotSelected == CardSlot.None) // select a card when none is currently selected.
         {
             if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
-                _cardSelected = cardNum; // select the card
+                _cardSlotSelected = cardNum; // select the card
                 cardMoveSound.Play();
             }
         }
-        else if (_cardSelected == cardNum) // deselect a card by pressing it's button again.
+        else if (_cardSlotSelected == cardNum) // deselect a card by pressing it's button again.
         {
-            _cardSelected = CardSelected.None;
+            _cardSlotSelected = CardSlot.None;
             cardMoveSound.Play();
         }
         else // switch cards by pressing another card's button when a card is selected.
         {
             // switch the cards
-            Card card = deck.Hand[(int)_cardSelected];
-            deck.Hand[(int) _cardSelected] = deck.Hand[(int)cardNum];
+            Card card = deck.Hand[(int)_cardSlotSelected];
+            CardObject cardObject = _visualHand[(int) _cardSlotSelected];
+            cardObject.SetSlot(cardNum);
+            _visualHand[(int) cardNum].SetSlot(_cardSlotSelected);
+            deck.Hand[(int) _cardSlotSelected] = deck.Hand[(int)cardNum];
+            _visualHand[(int) _cardSlotSelected] = _visualHand[(int) cardNum];
             deck.Hand[(int)cardNum] = card;
+            _visualHand[(int) cardNum] = cardObject;
             
             if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
-                _cardSelected = CardSelected.Card1;
+                _cardSlotSelected = CardSlot.Card1;
             }
             cardMoveSound.Play();
+        }
+    }
+
+    public Transform GetCardModelTarget(CardSlot card)
+    {
+        if (card == _cardSlotSelected)
+        {
+            return focusedCardPos;
+        }
+        else
+        {
+            switch (card)
+            {
+                case CardSlot.None:
+                    return focusedCardPos;
+                case CardSlot.Held:
+                    return focusedCardPos;
+                case CardSlot.Card1:
+                    return card1Pos;
+                case CardSlot.Card2:
+                    return card2Pos;
+                case CardSlot.Card3:
+                    return card3Pos;
+                case CardSlot.Card4:
+                    return card4Pos;
+                case CardSlot.Card5:
+                    return card5Pos;
+                case CardSlot.Deck:
+                    return deckPos;
+                case CardSlot.Discard:
+                    return discardPos;
+                default:
+                    return focusedCardPos;
+            }
         }
     }
 
     private void Use()
     {
         RaycastHit hit;
-        if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f)
-            && hit.transform.CompareTag("UseTarget"))
+        if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f, LayerMask.GetMask("UseTarget")))
         {
-            hit.transform.GetComponent<UseTarget>().Use();
+            hit.transform.GetComponent<UseTarget>().Use(this);
+        }
+    }
+
+    public void PickupCard(CardObject cardObject)
+    {
+        if (_cardSlotSelected == CardSlot.None)
+        {
+            cardObject.SetPlayer(this);
+            cardObject.SetSlot(CardSlot.Held);
+        }
+    }
+
+    public void Draw()
+    {
+        if (deck.CardsInHand() < 5 && deck.Undrawn.Count > 0)
+        {
+            CardSlot slot = CardSlot.None;
+            for (int i = 0; i < 5; i++)
+            {
+                if (deck.Hand[i] == null)
+                {
+                    deck.Hand[i] = deck.Undrawn[0];
+                    slot = (CardSlot)i;
+                    break;
+                }
+            }
+            deck.Undrawn.RemoveAt(0);
+            
+            GameObject newCardObject = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, deckPos);
+            _visualHand[(int) slot] = newCardObject.GetComponent<CardObject>();
+            _visualHand[(int) slot].SetPlayer(this);
+            _visualHand[(int) slot].BeSmall();
+            _visualHand[(int) slot].SetCard(deck.Hand[(int)slot]);
+            _visualHand[(int) slot].SetSlot(slot);
         }
     }
 

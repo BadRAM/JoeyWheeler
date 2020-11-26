@@ -61,24 +61,24 @@ public class Projectile : MonoBehaviour
             {
                 if (hit.collider.GetComponent<Hitbox>() == null)
                 {
+                    Debug.Log("hit a nonliving target, deactivated without dealing damage.");
                     // move the transform to the appropriate collision position
                     transform.position = hit.point + transform.forward * -colliderRadius;
                     Collide(hit);
                 }
                 else
                 {
+                    Debug.Log("Collided with a living target of team: " + hit.collider.GetComponent<Hitbox>().Team() + ", own team is: " + _team);
                     if (hitAllies || hit.collider.GetComponent<Hitbox>().Team() != _team)
                     {
                         // move the transform to the appropriate collision position
                         transform.position = hit.point + transform.forward * -colliderRadius;
                         Collide(hit);
                     }
-
                 }
             }
             _lastpos = transform.position;
-            
-            
+
             // destroy self if at end of lifetime.
             if (Time.time - _startTime > lifetime)
             {

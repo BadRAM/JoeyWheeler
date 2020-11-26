@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1038255661522243832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3685334084373587210}
+  - component: {fileID: 8603196305586222103}
+  m_Layer: 14
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3685334084373587210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038255661522243832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6610658353090233073}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8603196305586222103
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038255661522243832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5129782833497705361
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4900818100548346279}
   - component: {fileID: 413748151031407973}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 5129782833497705361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.98, y: 0.98, z: 1}
   m_Children: []
   m_Father: {fileID: 6610658353090233073}
   m_RootOrder: 2
@@ -71,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b2e449932c509741b5af711cbcf624b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,7 +137,7 @@ GameObject:
   - component: {fileID: 6610658351810573528}
   - component: {fileID: 6610658351810573534}
   - component: {fileID: 6610658351810573529}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +307,7 @@ GameObject:
   - component: {fileID: 6610658352297802794}
   - component: {fileID: 6610658352297802792}
   - component: {fileID: 6610658352297802795}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +477,7 @@ GameObject:
   - component: {fileID: 6610658352560375824}
   - component: {fileID: 6610658352560375830}
   - component: {fileID: 6610658352560375825}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +647,7 @@ GameObject:
   - component: {fileID: 6610658352651905652}
   - component: {fileID: 6610658352651905658}
   - component: {fileID: 6610658352651905653}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6610658352924445131}
   - component: {fileID: 6610658352924445128}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,7 +898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6610658353090233073}
   - component: {fileID: 2330961850647657324}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CardWorld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,6 +925,7 @@ Transform:
   - {fileID: 6610658352297802794}
   - {fileID: 6610658352651905652}
   - {fileID: 6610658352560375824}
+  - {fileID: 3685334084373587210}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -896,6 +941,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c44fd6dcfd6cd44380156573de2d00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldSize: 0.1
+  handSize: 0.015
+  handAnimSpeed: 0.01
+  rotationSpeed: 10
+  fallSpeed: 1
+  floatHeight: 0.5
   nameText: {fileID: 6610658351810573529}
   description: {fileID: 6610658353594318987}
   fact: {fileID: 6610658352297802795}
@@ -905,6 +956,8 @@ MonoBehaviour:
   background: {fileID: 6610658352924445128}
   border: {fileID: 6610658353592651701}
   card: {fileID: 11400000, guid: 7e8a50f5922edbc47bcd9082de99d1f4, type: 2}
+  player: {fileID: 0}
+  cardSlot: 0
 --- !u!1 &6610658353103935008
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6610658353103935009}
   - component: {fileID: 6610658353103935014}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,7 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6610658353592651700}
   - component: {fileID: 6610658353592651701}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: cbd628785ab9f914aa614f002b1fd21d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a6e717a10fbb1f489f062753416bf32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1080,7 +1133,7 @@ GameObject:
   - component: {fileID: 6610658353594318986}
   - component: {fileID: 6610658353594318984}
   - component: {fileID: 6610658353594318987}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}

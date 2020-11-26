@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Friend
   m_EditorClassIdentifier: 
   Name: :)
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: Summon an ally
-  Art: {fileID: 0}
+  Fact: 
   Type: 1
   Tier: 0
   range: Infinity

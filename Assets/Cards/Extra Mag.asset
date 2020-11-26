@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Extra Mag
   m_EditorClassIdentifier: 
   Name: Extra Mag
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: Reload your current weapon
-  Art: {fileID: 0}
+  Fact: 
   Type: 3
   Tier: 0

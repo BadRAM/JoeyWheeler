@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Pulse Laser
   m_EditorClassIdentifier: 
   Name: Pulse Laser
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: Get a pulse laser
-  Art: {fileID: 0}
+  Fact: 
   Type: 0
   Tier: 1
   weapon: {fileID: 6412085962162050170, guid: b629e2ca8f0374a49968aaaba175ca8b, type: 3}
