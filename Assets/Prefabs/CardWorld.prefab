@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3685334084373587210}
   - component: {fileID: 8603196305586222103}
+  - component: {fileID: 8341599534819100766}
   m_Layer: 14
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: UseTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +45,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8341599534819100766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038255661522243832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f39ed1cfaa64174e94d6dddd202aa66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Switch with card
+  useEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  cardObject: {fileID: 2330961850647657324}
 --- !u!1 &5129782833497705361
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +850,7 @@ Transform:
   m_GameObject: {fileID: 6610658352924445130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.98, y: 0.98, z: 1}
   m_Children: []
   m_Father: {fileID: 6610658353090233073}
   m_RootOrder: 1
@@ -877,7 +895,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: eb91c6fdc84933b4d9860a44c0324d44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -941,9 +959,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c44fd6dcfd6cd44380156573de2d00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  card: {fileID: 11400000, guid: 7e8a50f5922edbc47bcd9082de99d1f4, type: 2}
   worldSize: 0.1
   handSize: 0.015
-  handAnimSpeed: 0.01
+  handAnimSpeed: 10
   rotationSpeed: 10
   fallSpeed: 1
   floatHeight: 0.5
@@ -955,7 +974,8 @@ MonoBehaviour:
   art: {fileID: 413748151031407973}
   background: {fileID: 6610658352924445128}
   border: {fileID: 6610658353592651701}
-  card: {fileID: 11400000, guid: 7e8a50f5922edbc47bcd9082de99d1f4, type: 2}
+  pickupCollider: {fileID: 8603196305586222103}
+  tierArt: {fileID: 11400000, guid: 5d22bdc8d2256594fb9681093be999f2, type: 2}
   player: {fileID: 0}
   cardSlot: 0
 --- !u!1 &6610658353103935008
@@ -1111,7 +1131,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 2a6e717a10fbb1f489f062753416bf32, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ced4a0ccadfc3e743b04d869957c2710, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -6,21 +6,20 @@ using UnityEngine;
 
 public class CardUseTarget : UseTarget
 {
-    private CardObject _cardObject;
+    [SerializeField] private CardObject cardObject;
     private Collider _collider;
     private void Start()
     {
-        _cardObject = GetComponent<CardObject>();
         _collider = GetComponentInChildren<Collider>();
     }
 
     public override void Use(Player user)
     {
-        _cardObject.Pickup(user);
+        cardObject.Pickup(user);
     }
 
     public override String Description()
     {
-        return "Pickup card: " + _cardObject.GetCard().Name;
+        return "Pickup card: " + cardObject.GetName();
     }
 }

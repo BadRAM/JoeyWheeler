@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // Class for storing deck info.
 
@@ -46,6 +48,53 @@ public class Deck
                 Discards.RemoveAt(x);
             }
         }
+    }
+
+    
+    // moves all cards in hand and discards back to undrawn, and then shuffles.
+    public void Reset()
+    {
+        foreach (Card i in Hand)
+        {
+            if (i != null)
+            {
+                Undrawn.Add(i);
+            }        
+        }
+        Hand = new Card[5];
+
+        foreach (Card i in Discards)
+        {
+            Undrawn.Add(i);
+        }
+        Discards = new List<Card>();
+    }
+
+    public List<Card> GetCards()
+    {
+        List<Card> cards = new List<Card>();
+
+        foreach (Card i in Hand)
+        {
+            if (i != null)
+            {
+                cards.Add(i);
+            }
+        }
+
+        foreach (Card i in Discards)
+        {
+            cards.Add(i);
+        }
+        
+        foreach (Card i in Undrawn)
+        {
+            cards.Add(i);
+        }
+        
+        cards.Shuffle();
+
+        return cards;
     }
 
     public void Shuffle()

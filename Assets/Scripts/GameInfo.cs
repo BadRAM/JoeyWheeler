@@ -15,6 +15,8 @@ public static class GameInfo
     public static bool Paused;
     public static GameState State;
 
+    private static List<Card> _savedDeck;
+
     public enum GameState
     {
         Active,
@@ -31,6 +33,7 @@ public static class GameInfo
 
     public static void NewLevel()
     {
+        SaveDeck();
         LevelNumber++;
         TimeToBossSpawn += 180f;
     }
@@ -42,6 +45,19 @@ public static class GameInfo
         LevelNumber = 1;
         RunTime = 0f;
         Score = 0;
+        _savedDeck = null;
+    }
+
+    public static void SaveDeck()
+    {
+        Debug.Log("Saved Deck");
+        _savedDeck = Player.deck.GetCards();
+    }
+
+    public static List<Card> LoadSavedDeck()
+    {
+        
+        return _savedDeck;
     }
 }
 

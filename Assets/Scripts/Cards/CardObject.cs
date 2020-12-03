@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CardObject : MonoBehaviour
 {
+    [SerializeField] private Card card;
     [SerializeField] private float worldSize = 0.1f;
     [SerializeField] private float handSize = 0.05f;
     [SerializeField] private float handAnimSpeed = 1f;
@@ -20,7 +21,8 @@ public class CardObject : MonoBehaviour
     [SerializeField] private SpriteRenderer art;
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private SpriteRenderer border;
-    [SerializeField] private Card card;
+    [SerializeField] private Collider pickupCollider;
+    [SerializeField] private TierArt tierArt;
     [HideInInspector] public Player player;
     [HideInInspector] public Player.CardSlot cardSlot;
 
@@ -30,7 +32,7 @@ public class CardObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetCard(card);
     }
 
     // Update is called once per frame
@@ -38,6 +40,8 @@ public class CardObject : MonoBehaviour
     {
         if (player == null)
         {
+            pickupCollider.enabled = true;
+            
             transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, 
                 transform.right, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 
                 Mathf.Infinity), Vector3.up);
@@ -54,11 +58,13 @@ public class CardObject : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, player.GetCardModelTarget(cardSlot).position, Time.time * handAnimSpeed);
-            transform.position = Vector3.MoveTowards(transform.position, player.GetCardModelTarget(cardSlot).position, Time.time * handAnimSpeed * 0.01f);
+            pickupCollider.enabled = false;
+
+            transform.position = Vector3.Lerp(transform.position, player.GetCardModelTarget(cardSlot).position, Time.deltaTime * handAnimSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, player.GetCardModelTarget(cardSlot).position, Time.deltaTime * handAnimSpeed * 0.01f);
             
-            transform.localScale = Vector3.Lerp(transform.localScale, handSize * Vector3.one, Time.time * handAnimSpeed);
-            transform.localScale = Vector3.MoveTowards(transform.localScale, handSize * Vector3.one, Time.time * handAnimSpeed * 0.01f);
+            transform.localScale = Vector3.Lerp(transform.localScale, handSize * Vector3.one, Time.deltaTime * handAnimSpeed);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, handSize * Vector3.one, Time.deltaTime * handAnimSpeed * 0.01f);
             if (transform.position == player.GetCardModelTarget(cardSlot).position)
             {
                 transform.parent = player.GetCardModelTarget(cardSlot);
@@ -68,8 +74,8 @@ public class CardObject : MonoBehaviour
                     return;
                 }
             }
-            transform.rotation = Quaternion.Lerp(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.time * handAnimSpeed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.time * handAnimSpeed * 0.01f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.deltaTime * handAnimSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.deltaTime * handAnimSpeed * 0.01f);
         }
     }
 
@@ -80,19 +86,19 @@ public class CardObject : MonoBehaviour
 
     public void Pickup(Player user)
     {
-        player.PickupCard(this);
+        user.PickupCard(this);
     }
 
     public void UpdateCard()
     {
-        nameText.text = card.name;
+        nameText.text = card.Name;
         description.text = card.Description;
         fact.text = card.Fact;
         type.text = card.Type.ToString();
         tier.text = card.Tier.ToString();
         art.sprite = card.Art;
-        
-        // TODO: Set background and border to reflect type and tier.
+        background.sprite = tierArt.GetTypeBackground(card.Type);
+        border.sprite = tierArt.GetTierBorder(card.Tier);
     }
 
     public void SetSlot(Player.CardSlot slot)
@@ -116,8 +122,12 @@ public class CardObject : MonoBehaviour
         transform.localScale = handSize * Vector3.one;
     }
 
-    public void Drop()
+    public void Drop(Vector3 pos)
     {
+        transform.position = pos;
+        player = null;
+        transform.parent = null;
+        cardSlot = Player.CardSlot.None;
         transform.localScale = Vector3.one * worldSize;
     }
 
@@ -129,5 +139,10 @@ public class CardObject : MonoBehaviour
     public Card GetCard()
     {
         return card;
+    }
+
+    public string GetName()
+    {
+        return card.Name;
     }
 }

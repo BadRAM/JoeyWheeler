@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e758f64bb6791234c982cc3d98529672, type: 3}
-  m_Name: Extra Mag
+  m_Name: Reload
   m_EditorClassIdentifier: 
-  Name: Extra Mag
-  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  Name: Reload
+  Art: {fileID: 21300000, guid: d32faf27e0730a54aad14b15efffdb42, type: 3}
   Description: Reload your current weapon
-  Fact: 
+  Fact: Bullets? What are those? The gun just shoots until it doesn't.
   Type: 3
   Tier: 0

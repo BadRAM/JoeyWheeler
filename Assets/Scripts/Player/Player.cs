@@ -108,7 +108,6 @@ public class Player : MonoBehaviour
         
         GameInfo.Player = GetComponent<Player>();
         GameInfo.State = GameInfo.GameState.Active;
-        deck = new Deck(startingDeck.Cards);
         _cardSlotSelected = CardSlot.None;
 
         deathScreen.enabled = false;
@@ -118,6 +117,16 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         Camera cam = raycastOrigin.GetComponent<Camera>();
+
+        if (GameInfo.LoadSavedDeck() != null)
+        {
+            Debug.Log("Loading saved deck.");
+            deck = new Deck(GameInfo.LoadSavedDeck());
+        }
+        else
+        {
+            deck = new Deck(startingDeck.Cards);
+        }
         
         focusedCardPos = new GameObject().transform;
         focusedCardPos.gameObject.name = "FocusedCardPos";
@@ -215,16 +224,16 @@ public class Player : MonoBehaviour
 //        card4Name.text = deck.GetNameOfCardInHand(3);
 //        card5Name.text = deck.GetNameOfCardInHand(4);
 
-        if (_cardSlotSelected != CardSlot.None)
-        {
-            selectedCardName.text = deck.Hand[(int) _cardSlotSelected].Name;
-            selectedCardDescription.text = deck.Hand[(int) _cardSlotSelected].Description;
-        }
-        else
-        {
-            selectedCardName.text = "";
-            selectedCardDescription.text = "";
-        }
+//        if (_cardSlotSelected != CardSlot.None)
+//        {
+//            selectedCardName.text = deck.Hand[(int) _cardSlotSelected].Name;
+//            selectedCardDescription.text = deck.Hand[(int) _cardSlotSelected].Description;
+//        }
+//        else
+//        {
+//            selectedCardName.text = "";
+//            selectedCardDescription.text = "";
+//        }
         
         if (weapon != null)
         {
@@ -238,7 +247,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f, LayerMask.GetMask("UseTarget")))
         {
-            interactPrompt.text = hit.transform.GetComponent<UseTarget>().Description();
+            interactPrompt.text = hit.collider.GetComponent<UseTarget>().Description();
         }
         else
         {
@@ -306,6 +315,11 @@ public class Player : MonoBehaviour
         }
 
         _drawTimer -= Time.deltaTime;
+
+        if (_cardSlotSelected != CardSlot.None && deck.Hand[(int)_cardSlotSelected] == null)
+        {
+            _cardSlotSelected = CardSlot.None;
+        }
     }
 
     public void Hurt(int damage)
@@ -340,6 +354,7 @@ public class Player : MonoBehaviour
             _visualHand[(int)_cardSlotSelected].Discard();
             toPlay.Activate(this, raycastOrigin);
             _cardSlotSelected = CardSlot.None;
+            cardMoveSound.Play();
         }
         else if (weapon != null)
         {
@@ -361,6 +376,7 @@ public class Player : MonoBehaviour
         {
             _visualHand[(int)_cardSlotSelected].SetSlot(_cardSlotSelected);
             _cardSlotSelected = CardSlot.None;
+            cardMoveSound.Play();
         }
         else if (weapon != null)
         {
@@ -485,11 +501,19 @@ public class Player : MonoBehaviour
 
     public void PickupCard(CardObject cardObject)
     {
-        if (_cardSlotSelected == CardSlot.None)
+        if (_cardSlotSelected != CardSlot.None)
         {
+            _visualHand[(int)_cardSlotSelected].Drop(cardObject.transform.position);
+            _visualHand[(int) _cardSlotSelected] = cardObject;
+            //_visualHand[(int)_cardSlotSelected].Drop();
+            deck.Hand[(int) _cardSlotSelected] = _visualHand[(int) _cardSlotSelected].GetCard();
+
+            cardObject.transform.position = focusedCardPos.position;
+
             cardObject.SetPlayer(this);
             cardObject.SetSlot(CardSlot.Held);
         }
+        
     }
 
     public void Draw()
