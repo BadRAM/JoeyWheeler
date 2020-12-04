@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: TierArt
   m_EditorClassIdentifier: 
   Tier1Border: {fileID: 21300000, guid: 2a6e717a10fbb1f489f062753416bf32, type: 3}
-  Tier2Border: {fileID: 0}
-  Tier3Border: {fileID: 0}
-  Tier4Border: {fileID: 0}
-  Type1Background: {fileID: 0}
-  Type2Background: {fileID: 0}
-  Type3Background: {fileID: 0}
-  Type4Background: {fileID: 0}
-  Type5Background: {fileID: 0}
-  Type6Background: {fileID: 0}
+  Tier2Border: {fileID: 21300000, guid: 24a6db6a3397bf74f8aaaa19c29a1ba9, type: 3}
+  Tier3Border: {fileID: 21300000, guid: f07026c90d5da2b44ac943fbe1dce089, type: 3}
+  Tier4Border: {fileID: 21300000, guid: ced4a0ccadfc3e743b04d869957c2710, type: 3}
+  Type1Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type2Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type3Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type4Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
+  Type5Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
+  Type6Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
