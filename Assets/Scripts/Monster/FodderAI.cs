@@ -48,6 +48,12 @@ public class FodderAI : AI
                 break;
 
             case States.Pursuit:
+                if (_target != null)
+                {
+                    _state = States.Idle;
+                    break;
+                }
+
                 float distanceToTarget = _target.Distance(_monster.GetCenter());
                 if (distanceToTarget > visionRange || !_target.CanSeeFrom(_monster.GetCenter())
                 ) // is the target obscured?
@@ -82,7 +88,6 @@ public class FodderAI : AI
                 }
                 Debug.DrawLine(transform.position, _agent.destination, Color.green);
                 break;
-            
         }
     }
 }
