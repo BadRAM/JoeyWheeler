@@ -245,9 +245,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBlock: {fileID: 1348176447325355865, guid: 31b1503ff3241e34cab3a4fd9ddf20e6, type: 3}
-  levelBlock2: {fileID: 7099311623929855840, guid: 2b0e4d621ca53c640847d050eed21879, type: 3}
-  levelAmount: 2
+  tileArray:
+  - {fileID: 1348176447325355865, guid: 31b1503ff3241e34cab3a4fd9ddf20e6, type: 3}
+  - {fileID: 7099311623929855840, guid: 2b0e4d621ca53c640847d050eed21879, type: 3}
+  - {fileID: 892581138588125092, guid: a64ec4e7e420837479d642ba11cabe6e, type: 3}
+  levelAmount: 10
   UsedSpaces: []
+  wall: {fileID: 281277430001829708, guid: 2a0326fefcce15745b5d942799d48ab7, type: 3}
 --- !u!4 &96258094
 Transform:
   m_ObjectHideFlags: 0

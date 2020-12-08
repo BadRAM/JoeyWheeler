@@ -10,6 +10,7 @@ public class LevelGeneration : MonoBehaviour
     private List<GameObject> gObjects = new List<GameObject>();
     private GameObject[] exitList;
     [SerializeField] private List<Vector3> UsedSpaces = new List<Vector3>();
+    [SerializeField] private GameObject wall;
 
     private Transform test;
     // Start is called before the first frame update
@@ -71,6 +72,7 @@ public class LevelGeneration : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("Invalid");
                         obj = Instantiate(levelBlock, ExitPoint.position, Quaternion.identity);
                         obj.transform.parent = transform;
                         moveObjectNextTo(ExitPoint.transform, obj.transform.GetChild(0));
@@ -81,6 +83,11 @@ public class LevelGeneration : MonoBehaviour
 
             }
             exitList = GameObject.FindGameObjectsWithTag("ExitPoint");
+        }
+
+        foreach (GameObject exit in GameObject.FindGameObjectsWithTag("ExitPoint"))
+        {
+            Instantiate(wall, exit.transform.position, Quaternion.identity);
         }
     }
 
@@ -105,6 +112,7 @@ public class LevelGeneration : MonoBehaviour
         obj.position = ExitPoint.position;
         Transform newExit = getRandomExit(obj);
         RotateObject(ExitPoint, newExit);
+        Destroy(ExitPoint.gameObject);
     }
 
     private bool extendObjectNextTo(Transform ExtendPoint, Transform ExtendRec)
