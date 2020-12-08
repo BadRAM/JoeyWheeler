@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas winScreen;
     [SerializeField] private Canvas pauseScreen;
-    [SerializeField] private Transform raycastOrigin;
+    [SerializeField] public Transform raycastOrigin;
     [SerializeField] private Transform hand;
     [SerializeField] private StartingDeck startingDeck;
     [SerializeField] private float drawInterval;
