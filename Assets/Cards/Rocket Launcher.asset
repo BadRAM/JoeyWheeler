@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Rocket Launcher
   m_EditorClassIdentifier: 
   Name: Rocket Launcher
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: Get a rocket launcher
-  Art: {fileID: 0}
+  Fact: 
   Type: 0
   Tier: 2
   weapon: {fileID: 145035164345357161, guid: 7160bb4df2e5bd54e9c3fee319948cdc, type: 3}

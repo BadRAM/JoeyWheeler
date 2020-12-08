@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda8f3a9b4c13a44290aaf1e0bd7f6f4, type: 3}
+  m_Name: TierArt
+  m_EditorClassIdentifier: 
+  Tier1Border: {fileID: 21300000, guid: 2a6e717a10fbb1f489f062753416bf32, type: 3}
+  Tier2Border: {fileID: 21300000, guid: 24a6db6a3397bf74f8aaaa19c29a1ba9, type: 3}
+  Tier3Border: {fileID: 21300000, guid: f07026c90d5da2b44ac943fbe1dce089, type: 3}
+  Tier4Border: {fileID: 21300000, guid: ced4a0ccadfc3e743b04d869957c2710, type: 3}
+  Type1Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type2Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type3Background: {fileID: 21300000, guid: 14e2a5260affe364e83d3a017d856351, type: 3}
+  Type4Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
+  Type5Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}
+  Type6Background: {fileID: 21300000, guid: 18883ac2802737c49ab44b64752bed22, type: 3}

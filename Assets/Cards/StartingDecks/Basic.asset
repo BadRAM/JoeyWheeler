@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   Cards:
-  - {fileID: 11400000, guid: c818b85561646cb4e8cfeb7d56692da4, type: 2}
+  - {fileID: 11400000, guid: 49006c898d94d264d8dac6f8e50c5203, type: 2}
   - {fileID: 11400000, guid: c818b85561646cb4e8cfeb7d56692da4, type: 2}
   - {fileID: 11400000, guid: c818b85561646cb4e8cfeb7d56692da4, type: 2}
   - {fileID: 11400000, guid: c818b85561646cb4e8cfeb7d56692da4, type: 2}
@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b433db9cb810a446bd55f40d505dc33, type: 2}
   - {fileID: 11400000, guid: 8b433db9cb810a446bd55f40d505dc33, type: 2}
   - {fileID: 11400000, guid: 8b433db9cb810a446bd55f40d505dc33, type: 2}
-  - {fileID: 11400000, guid: b8883f157dd3d2646bece1de534d792a, type: 2}
+  - {fileID: 11400000, guid: 49006c898d94d264d8dac6f8e50c5203, type: 2}
   - {fileID: 11400000, guid: b8883f157dd3d2646bece1de534d792a, type: 2}
   - {fileID: 11400000, guid: b8883f157dd3d2646bece1de534d792a, type: 2}
   - {fileID: 11400000, guid: 4924a318952d5ad4a9d41ad9b4b395d3, type: 2}
@@ -31,5 +31,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14ffc200970812d4d89f0e8e348d46ba, type: 2}
   - {fileID: 11400000, guid: 686166845f7662345b61f186d24a1b11, type: 2}
   - {fileID: 11400000, guid: 686166845f7662345b61f186d24a1b11, type: 2}
-  - {fileID: 11400000, guid: 14ffc200970812d4d89f0e8e348d46ba, type: 2}
-  - {fileID: 11400000, guid: e67a9e6ef8e0f5349b4fb0ae529f21f1, type: 2}
+  - {fileID: 11400000, guid: 8fb5bce74e49f484b8baa3208e576269, type: 2}
+  - {fileID: 11400000, guid: 8fb5bce74e49f484b8baa3208e576269, type: 2}

@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f816748a12d60d34a9527e80e4a4508f, type: 3}
-  m_Name: Basic Heal
+  m_Name: Skeletal Prosthesis
   m_EditorClassIdentifier: 
-  Name: Bone Healing Juice
-  Description: mMMm my bones
-  Art: {fileID: 0}
+  Name: Skeletal Prosthesis
+  Art: {fileID: 21300000, guid: 7def975498e754547ae4646c24d4fb0f, type: 3}
+  Description: Return 4 cards from your discard pile to your deck.
+  Fact: Skeletal prosthesis is an easy quick fix for dismemberment, until a better
+    healer can regrow the limb.
   Type: 3
   Tier: 1
   cardsToRestore: 4

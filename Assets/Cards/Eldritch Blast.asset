@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Eldritch Blast
   m_EditorClassIdentifier: 
   Name: Eldritch Blast
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
   Description: C'thulu blows his load
+  Fact: 
   Type: 3
   Tier: 2
   SpellPrefab: {fileID: 4547230972685628813, guid: 0d2c77a4727e8fe4ab56dbbd835f2fc1, type: 3}

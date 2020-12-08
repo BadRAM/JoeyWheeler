@@ -10,6 +10,9 @@ public class ExtraMag : Card
     protected override void Action()
     {
         Player p = _caster.GetComponent<Player>();
-        p.weapon.Ammo = p.weapon.MaxAmmo;
+        if (p.weapon != null)
+        {
+            p.LoadWeapon();
+        }
     }
 }

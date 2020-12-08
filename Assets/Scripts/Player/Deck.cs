@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // Class for storing deck info.
 
@@ -16,26 +18,22 @@ public class Deck
         Undrawn.Shuffle();
         Hand = new Card[5];
         Discards = new List<Card>();
-        Debug.Log(Hand[0]);
     }
 
     // Draw num cards to the hand from the top (0) of the undrawn pile.
     // Returns true if successful, even partially, false if no cards were drawn. Will fail if hand is full, or pile is empty. 
-    public bool Draw(int num)
-    {
-        bool didDraw = false;
-        for (int i = 0; i < num; i++)
-        {
-            if (CardsInHand() < 5 && Undrawn.Count > 0)
-            {
-                AddCardToHand(Undrawn[0]);
-                Undrawn.RemoveAt(0);
-                didDraw = true;
-            }
-        }
-
-        return didDraw;
-    }
+//    public Player.CardSlot Draw()
+//    {
+//        bool didDraw = false;
+//        if (CardsInHand() < 5 && Undrawn.Count > 0)
+//        {
+//            Player.CardSlot slot = AddCardToHand(Undrawn[0]);
+//            Undrawn.RemoveAt(0);
+//            return slot;
+//        }
+//
+//        return Player.CardSlot.None;
+//    }
 
     // Shuffle discards back into deck
     public void Restore(int num)
@@ -47,8 +45,56 @@ public class Deck
                 int x = Random.Range(0, Discards.Count);
                 int y = Random.Range(0, Undrawn.Count);
                 Undrawn.Insert(y, Discards[x]);
+                Discards.RemoveAt(x);
             }
         }
+    }
+
+    
+    // moves all cards in hand and discards back to undrawn, and then shuffles.
+    public void Reset()
+    {
+        foreach (Card i in Hand)
+        {
+            if (i != null)
+            {
+                Undrawn.Add(i);
+            }        
+        }
+        Hand = new Card[5];
+
+        foreach (Card i in Discards)
+        {
+            Undrawn.Add(i);
+        }
+        Discards = new List<Card>();
+    }
+
+    public List<Card> GetCards()
+    {
+        List<Card> cards = new List<Card>();
+
+        foreach (Card i in Hand)
+        {
+            if (i != null)
+            {
+                cards.Add(i);
+            }
+        }
+
+        foreach (Card i in Discards)
+        {
+            cards.Add(i);
+        }
+        
+        foreach (Card i in Undrawn)
+        {
+            cards.Add(i);
+        }
+        
+        cards.Shuffle();
+
+        return cards;
     }
 
     public void Shuffle()
@@ -89,17 +135,17 @@ public class Deck
         }
     }
 
-    public bool AddCardToHand(Card toAdd)
+    public Player.CardSlot AddCardToHand(Card toAdd)
     {
         for (int i = 0; i < 5; i++)
         {
             if (Hand[i] == null)
             {
                 Hand[i] = toAdd;
-                return true;
+                return (Player.CardSlot)i;
             }
         }
-        return false;
+        return Player.CardSlot.None;
     }
 
     // Knocks cards out of the player's hand and deck when damage is taken.
@@ -147,6 +193,7 @@ public class Deck
             {
                 return true;
             }
+            Discards.Add(Undrawn[0]);
             Undrawn.RemoveAt(0);
             deckDamage--;
         }

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Team: 1
   IsBoss: 1
-  Health: 50
+  Health: 100
   DeathDuration: 0
   disableOnDeath: {fileID: 3491551241623976675}
   enableOnDeath: {fileID: 1151926430831919525}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5269869520533885411}
   - component: {fileID: 6442735765315902927}
   - component: {fileID: 5089591502247022498}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: DisableOnDeath
   m_TagString: Monster
   m_Icon: {fileID: 0}

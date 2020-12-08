@@ -7,8 +7,10 @@ using UnityEngine.AI;
 // The core monster controller class. All monsters must have a monster script attached to them.
 // It interfaces with an AI script for behaviors, which in turn controls a weapon script which defines it's attack behaviors.
 
+// TODO: Implement rigidbody switching for knockback.
+// TODO: Refactor EnemyWeapon class into EnemyAttack, support multiple.
+
 [RequireComponent(typeof(AI))]
-[RequireComponent(typeof(EnemyWeapon))]
 public class Monster : MonoBehaviour
 {
     public int Team = 1;

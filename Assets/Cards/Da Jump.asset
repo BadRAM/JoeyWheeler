@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f6336d5794ff141874b82426da0b37, type: 3}
+  m_Name: Da Jump
+  m_EditorClassIdentifier: 
+  Name: Launch
+  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  Description: Send you flying in the direction you're looking
+  Fact: While the cold gusts of space can be warded off by a thick coat, some method
+    of levitation is necessary to get back to gravity.
+  Type: 3
+  Tier: 0
+  Strength: 30

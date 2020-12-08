@@ -11,12 +11,12 @@ public class UseTarget : MonoBehaviour
     [SerializeField] private string description;
     [SerializeField] private UnityEvent useEvent;
 
-    public void Use()
+    public virtual void Use(Player user)
     {
         useEvent.Invoke();
     }
 
-    public string Description()
+    public virtual string Description()
     {
         return description;
     }

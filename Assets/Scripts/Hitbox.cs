@@ -25,4 +25,14 @@ public class Hitbox : MonoBehaviour
             player.Hurt((int)damage);
         }
     }
+
+    public int Team()
+    {
+        if (monster != null)
+        {
+            return monster.Team;
+        }
+
+        return 0;
+    }
 }

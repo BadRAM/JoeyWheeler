@@ -11,6 +11,9 @@ public class PotOfGreed : Card
 
     protected override void Action()
     {
-        _caster.GetComponent<Player>().deck.Draw(DrawNumber);
+        for (int i = 0; i < DrawNumber; i++)
+        {
+            _caster.GetComponent<Player>().Draw();
+        }
     }
 }
