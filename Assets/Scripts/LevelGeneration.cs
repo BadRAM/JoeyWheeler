@@ -54,6 +54,12 @@ public class LevelGeneration : MonoBehaviour
                 obj.transform.parent = transform;
                 for (var j = 0; j < obj.transform.childCount; j++)
                 {
+                    if (!obj.transform.GetChild(j).CompareTag("Flat"))
+                    {
+                        Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is not flat");
+                        continue;
+                    }
+                    Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is flat");
                     if (j == 0)
                     {
                         moveObjectNextTo(ExitPoint.transform, obj.transform.GetChild(j));
@@ -143,11 +149,13 @@ public class LevelGeneration : MonoBehaviour
         List<Transform> listOfNewExits = new List<Transform>();
         foreach(Transform child in Target)
         {
+            
             if (child.tag == tagString)
             {
                 listOfNewExits.Add(child);
             }
         }
+        Debug.Log("parent of target is: " + Target.parent.name + ", count: " + listOfNewExits.Count);
         return listOfNewExits[Random.Range(0, listOfNewExits.Count)];
     }
     /// <summary>

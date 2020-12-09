@@ -8,6 +8,9 @@ TagManager:
   - UseTarget
   - Monster
   - ExitPoint
+  - ExtendPoint
+  - ExtendRec
+  - Flat
   layers:
   - Default
   - TransparentFX
