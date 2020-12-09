@@ -251,7 +251,7 @@ MonoBehaviour:
   - {fileID: 892581138588125092, guid: a64ec4e7e420837479d642ba11cabe6e, type: 3}
   - {fileID: 4933004709383407775, guid: f00f8fd86a2b7d845af517dec2366fac, type: 3}
   - {fileID: 3084618286802308444, guid: fe9099a6063e0854c94687ffb41c240c, type: 3}
-  levelAmount: 25
+  levelAmount: 50
 --- !u!4 &96258094
 Transform:
   m_ObjectHideFlags: 0

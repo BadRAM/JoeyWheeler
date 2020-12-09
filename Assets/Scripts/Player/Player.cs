@@ -96,13 +96,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<Transform> spawns = new List<Transform>();
-
-        foreach (GameObject i in GameObject.FindGameObjectsWithTag("ScorePickupSpawn"))
-        {
-            spawns.Add(i.transform);
-        }
-        transform.position = spawns[Random.Range(0, spawns.Count-1)].position;
+//        List<Transform> spawns = new List<Transform>();
+//
+//        foreach (GameObject i in GameObject.FindGameObjectsWithTag("ScorePickupSpawn"))
+//        {
+//            spawns.Add(i.transform);
+//        }
+//        transform.position = spawns[Random.Range(0, spawns.Count-1)].position;
         
         _walker = GetComponent<FPSWalk>();
         
