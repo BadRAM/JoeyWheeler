@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &39795599
 Light:
   m_ObjectHideFlags: 0
@@ -249,6 +249,7 @@ MonoBehaviour:
   tileArray:
   - {fileID: 1526569508066497442, guid: ad89da6d1a8bfb14d9402816b05f1d7b, type: 3}
   - {fileID: 5202508471251387804, guid: 4626d8533cc747c42a97035451ac999a, type: 3}
+  - {fileID: 6190531033908748825, guid: b29b3a27b6d72d841b2fcc0c0203575f, type: 3}
   levelAmount: 30
 --- !u!4 &96258094
 Transform:
@@ -2523,10 +2524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5654486015081991345, guid: b9818e55c4954334f9e075652da6d97b, type: 3}
-      propertyPath: startingDeck
-      value: 
-      objectReference: {fileID: 11400000, guid: efad89cd4c0d3a64998febcb54b74232, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9818e55c4954334f9e075652da6d97b, type: 3}
 --- !u!1 &1902490824
