@@ -5524,7 +5524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7dc5384a11a30940a186b8683136890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: dm_agressive
+  sceneToLoad: generation2
   difficulty: 1
 --- !u!1 &2693404016499915905
 GameObject:
@@ -6582,7 +6582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7dc5384a11a30940a186b8683136890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: dm_agressive
+  sceneToLoad: generation2
   difficulty: 1
 --- !u!1 &3944461218933870527
 GameObject:
