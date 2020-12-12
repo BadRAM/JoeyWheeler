@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: 53eebc9f780f29146a635b65be6d0ce8
+guid: 6769fb1cc0c8be448be75fd8acc2fdc8
 ModelImporter:
   serializedVersion: 20101
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -382410650019994693
+    second: P90Armature|Fire
+  - first:
+      74: -1407466678795768306
+    second: P90Armature|Reload
+  - first:
+      74: -3265759714822878061
+    second: P90|Fire
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -31,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

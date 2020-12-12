@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: 53eebc9f780f29146a635b65be6d0ce8
+guid: 8d41d080069a50e40bff9a67f29c9ba8
 ModelImporter:
   serializedVersion: 20101
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -7731120788715197594
+    second: ShotgunArmature|FireWBullet
+  - first:
+      74: 7130682805257073550
+    second: ShotgunArmature|FireWOBullet
+  - first:
+      74: -8429995278180102365
+    second: ShotgunArmature|Reload
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -31,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

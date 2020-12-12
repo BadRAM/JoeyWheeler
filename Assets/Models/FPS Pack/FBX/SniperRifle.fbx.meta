@@ -1,8 +1,17 @@
 fileFormatVersion: 2
-guid: 53eebc9f780f29146a635b65be6d0ce8
+guid: 86ccad2a08600b043b25e3118372698e
 ModelImporter:
   serializedVersion: 20101
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -6982373567105441027
+    second: SniperRifle |FireWBullet
+  - first:
+      74: 6908594860301533855
+    second: SniperRifle |FireWOBullet
+  - first:
+      74: -9035481519636946749
+    second: SniperRifle |Reload
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -31,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

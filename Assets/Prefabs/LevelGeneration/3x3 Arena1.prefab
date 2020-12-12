@@ -125,9 +125,9 @@ BoxCollider:
   m_GameObject: {fileID: 589184268888716559}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1151479690671898756
 GameObject:
@@ -222,9 +222,9 @@ BoxCollider:
   m_GameObject: {fileID: 1151479690671898756}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2025210352577617209
 GameObject:
@@ -320,9 +320,9 @@ BoxCollider:
   m_GameObject: {fileID: 2025210352577617209}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2076031424999879527
 GameObject:
@@ -454,9 +454,9 @@ BoxCollider:
   m_GameObject: {fileID: 2210953387168649341}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3617095929662184651
 GameObject:
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 7468370548736419675}
   - component: {fileID: 2403959896541232842}
   - component: {fileID: 551042807423522902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,9 +649,9 @@ BoxCollider:
   m_GameObject: {fileID: 3646991943488631654}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4573217562588146957
 GameObject:
@@ -663,7 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5963016567425925662}
   - component: {fileID: 498414294718472316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,9 +838,9 @@ BoxCollider:
   m_GameObject: {fileID: 6356925205099128911}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6867220913273316320
 GameObject:
@@ -936,9 +936,9 @@ BoxCollider:
   m_GameObject: {fileID: 6867220913273316320}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8343387404882232539
 GameObject:
@@ -1033,9 +1033,9 @@ BoxCollider:
   m_GameObject: {fileID: 8343387404882232539}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &397873661564407435
 PrefabInstance:
