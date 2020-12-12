@@ -251,6 +251,7 @@ MonoBehaviour:
   - {fileID: 5202508471251387804, guid: 4626d8533cc747c42a97035451ac999a, type: 3}
   - {fileID: 6190531033908748825, guid: b29b3a27b6d72d841b2fcc0c0203575f, type: 3}
   - {fileID: 2076031424999879527, guid: 16fcfb2debc10b240bba7be852c4eaa3, type: 3}
+  - {fileID: 3084618286802308444, guid: fe9099a6063e0854c94687ffb41c240c, type: 3}
   levelAmount: 30
 --- !u!4 &96258094
 Transform:
