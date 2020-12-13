@@ -29,6 +29,7 @@ public class FPSWalk : MonoBehaviour
     [SerializeField] private float airStrafeForce = 5f;
     [SerializeField] private float maxSlope = 40f;
     [SerializeField] private float jumpForce = 5.3f;
+    [SerializeField] private float _controllerSensitivity = 3.5f;
     public bool LockLook;
     [SerializeField] private string[] footCollisionLayerMask = new []{"Terrain", "TransparentTerrain", "PlayerClip"};
     
@@ -287,7 +288,8 @@ public class FPSWalk : MonoBehaviour
             }
 
             // rotate the camera
-            _cameraX += Mouse.current.delta.x.ReadValue() * SettingsManager.CurrentSettings.Sensitivity;// * Time.deltaTime;
+            _cameraX += SettingsManager.CurrentSettings.Sensitivity * _input.Player.Look.ReadValue<Vector2>()[0];
+            _cameraX += _controllerSensitivity * _input.Player.RightStick.ReadValue<Vector2>()[0];
             if (_cameraX > 180)
             {
                 _cameraX -= 360;
@@ -298,6 +300,7 @@ public class FPSWalk : MonoBehaviour
             }
             
             _cameraY += -Mouse.current.delta.y.ReadValue() * SettingsManager.CurrentSettings.Sensitivity;// * Time.deltaTime;
+            _cameraY -= _controllerSensitivity * _input.Player.RightStick.ReadValue<Vector2>()[1];
             _cameraY = Mathf.Clamp(_cameraY, -90, 90);
             
             _rotator.eulerAngles = new Vector2(_rotator.eulerAngles.x, _cameraX);

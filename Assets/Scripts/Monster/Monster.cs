@@ -25,6 +25,11 @@ public class Monster : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField]private GameObject disableOnDeath;
     [SerializeField]private GameObject enableOnDeath;
+    private bool _isPhysical = false;
+    [SerializeField] private float _knockbackDuration = 1;
+    private float _knockbackTimer;
+    private Rigidbody _rigidbody;
+    private float _distanceToGround;
 
 
     // Start is called before the first frame update
@@ -33,7 +38,24 @@ public class Monster : MonoBehaviour
         _weapon = GetComponent<EnemyWeapon>();
         _AI = GetComponent<AI>();
         _agent = GetComponent<NavMeshAgent>();
+        _distanceToGround = GetComponent<Collider>().bounds.extents.y;
         //_agent.enabled = false;
+    }
+
+    void Update()
+    {
+        //Re-enable navigation after knockback duration
+        /*if (_isPhysical)
+        {
+            _knockbackTimer += Time.deltaTime;
+            if (_knockbackTimer > _knockbackDuration && IsGrounded())
+            {
+                _agent.enabled = true;
+                _rigidbody.isKinematic = true;
+                _isPhysical = false;
+                _knockbackTimer = 0;
+            }
+        }*/
     }
 
     private void FixedUpdate()
@@ -78,5 +100,26 @@ public class Monster : MonoBehaviour
     public Vector3 GetCenter()
     {
         return transform.position + Vector3.up * _agent.height / 2f;
+    }
+
+    public void Nickelback(Vector3 direction, float strength)
+    {
+        //Move in direction at strength
+        Debug.Log("direction is " + direction);
+        Debug.Log("strength is " + strength);
+    }
+    
+    //Disable NavMesh agent, enable physics on collision
+    public void Knockback()
+    {
+        _agent.enabled = false;
+        _rigidbody.isKinematic = false;
+        _isPhysical = true;
+        Debug.Log("collision");
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, -Vector3.up, _distanceToGround + 0.1f);
     }
 }

@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
     private bool _alive = true;
     private Vector3 _lastpos;
     private float _startTime; // is used for timers. updates to time of death on death of projectile, for persistence timing.
+    [SerializeField] private float knockbackStrength = 200;
 
     [HideInInspector] public GameObject owner;
     private int _team;
@@ -100,6 +101,8 @@ public class Projectile : MonoBehaviour
         if (hit.collider.GetComponent<Hitbox>() != null && (damageAllies || hit.collider.GetComponent<Hitbox>().Team() != _team))
         {
             hit.collider.GetComponent<Hitbox>().Hurt(damage);
+            hit.collider.GetComponent<Monster>().Knockback();
+            Knockback(hit.collider.GetComponent<Rigidbody>(), hit.point);
         }
 
         _alive = false;
@@ -120,6 +123,20 @@ public class Projectile : MonoBehaviour
         enableOnDeath.SetActive(true);
         //TrailParticles.Stop();
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    //knockback monsters
+    private void Knockback(Rigidbody _monsterRigidBody, Vector3 point)
+    {
+        //_monsterRigidBody = collision.collider.GetComponent<Rigidbody>();
+
+        if (_monsterRigidBody != null)
+        {
+            Vector3 direction = point - transform.position;
+            //direction.y = 0;
+            _monsterRigidBody.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse); // impulse allows mass to affect knockback strength
+        }
+        Debug.Log("Knockback was called");
     }
 
 //    private void Explode(Monster excludeMonster, bool excludePlayer)
