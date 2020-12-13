@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pulse Laser
   m_EditorClassIdentifier: 
   Name: Rapid Caster
-  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  Art: {fileID: 21300000, guid: d32faf27e0730a54aad14b15efffdb42, type: 3}
   Description: 3 Damage, 30 DPS. Hitscan
   Fact: Wizards can cast spells with their bare hands. Witches don't need to.
   Type: 0
