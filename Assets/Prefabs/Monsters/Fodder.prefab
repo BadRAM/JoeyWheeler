@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 396136062225713859}
   - component: {fileID: 396136062225713857}
   - component: {fileID: 396136062225713858}
+  - component: {fileID: 7271135095369269469}
+  - component: {fileID: 5784091279191967749}
   m_Layer: 0
   m_Name: Fodder
   m_TagString: Monster
@@ -55,6 +57,7 @@ MonoBehaviour:
   DeathDuration: 0
   disableOnDeath: {fileID: 3617528238129125246}
   enableOnDeath: {fileID: 989674138751560760}
+  _knockbackDuration: 1
 --- !u!114 &396136062225713859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +114,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &7271135095369269469
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396136062225713862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.49144173
+  m_Height: 2.185933
+  m_Direction: 1
+  m_Center: {x: -0.01968956, y: 0.9455352, z: 0.021284103}
+--- !u!54 &5784091279191967749
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396136062225713862}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &989674138751560760
 GameObject:
   m_ObjectHideFlags: 0

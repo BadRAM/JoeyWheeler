@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5418821251361799335}
   - component: {fileID: 2445171787914708685}
   - component: {fileID: 4143219593821899986}
+  - component: {fileID: 6184685881674809461}
   m_Layer: 9
   m_Name: MachineGunBullet
   m_TagString: Untagged
@@ -58,6 +59,7 @@ MonoBehaviour:
   persistence: 0
   enableOnDeath: {fileID: 7569646033558735653}
   disableOnDeath: {fileID: 2173335629345708171}
+  knockbackStrength: 2
   owner: {fileID: 0}
 --- !u!54 &4143219593821899986
 Rigidbody:
@@ -75,6 +77,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &6184685881674809461
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026672618947292269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2173335629345708171
 GameObject:
   m_ObjectHideFlags: 0

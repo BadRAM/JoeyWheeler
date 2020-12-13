@@ -25,7 +25,7 @@ public class Monster : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField]private GameObject disableOnDeath;
     [SerializeField]private GameObject enableOnDeath;
-    private bool _isPhysical;
+    private bool _isPhysical = false;
     [SerializeField] private float _knockbackDuration = 1;
     private float _knockbackTimer;
     private Rigidbody _rigidbody;
@@ -45,7 +45,7 @@ public class Monster : MonoBehaviour
     void Update()
     {
         //Re-enable navigation after knockback duration
-        if (_isPhysical)
+        /*if (_isPhysical)
         {
             _knockbackTimer += Time.deltaTime;
             if (_knockbackTimer > _knockbackDuration && IsGrounded())
@@ -55,7 +55,7 @@ public class Monster : MonoBehaviour
                 _isPhysical = false;
                 _knockbackTimer = 0;
             }
-        }
+        }*/
     }
 
     private void FixedUpdate()
@@ -101,12 +101,20 @@ public class Monster : MonoBehaviour
     {
         return transform.position + Vector3.up * _agent.height / 2f;
     }
+
+    public void Nickelback(Vector3 direction, float strength)
+    {
+        //Move in direction at strength
+        Debug.Log("direction is " + direction);
+        Debug.Log("strength is " + strength);
+    }
     
     //Disable NavMesh agent, enable physics on collision
-    private void OnCollisionEnter (Collision collision)
+    public void Knockback()
     {
         _agent.enabled = false;
         _rigidbody.isKinematic = false;
+        _isPhysical = true;
         Debug.Log("collision");
     }
 
