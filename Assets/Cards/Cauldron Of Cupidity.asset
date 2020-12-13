@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cauldron of Cupidity
   Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
-  Description: THIS ALLOWS ME TO DRAW TWO MORE CARDS TO MY HAND
+  Description: Draw two more cards
   Fact: 
   Type: 3
   Tier: 0
