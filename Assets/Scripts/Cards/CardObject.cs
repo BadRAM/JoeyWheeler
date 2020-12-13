@@ -3,31 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardObject : MonoBehaviour
 {
     [SerializeField] private Card card;
-    [SerializeField] private float worldSize = 0.1f;
-    [SerializeField] private float handSize = 0.05f;
     [SerializeField] private float handAnimSpeed = 1f;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float fallSpeed;
-    [SerializeField] private float floatHeight;
-    [SerializeField] private TextMeshPro nameText;
-    [SerializeField] private TextMeshPro description;
-    [SerializeField] private TextMeshPro fact;
-    [SerializeField] private TextMeshPro type;
-    [SerializeField] private TextMeshPro tier;
-    [SerializeField] private SpriteRenderer art;
-    [SerializeField] private SpriteRenderer background;
-    [SerializeField] private SpriteRenderer border;
-    [SerializeField] private Collider pickupCollider;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private TextMeshProUGUI fact;
+    [SerializeField] private TextMeshProUGUI type;
+    [SerializeField] private TextMeshProUGUI tier;
+    [SerializeField] private Image art;
+    [SerializeField] private Image background;
+    [SerializeField] private Image border;
     [SerializeField] private TierArt tierArt;
     [HideInInspector] public Player player;
-    [HideInInspector] public Player.CardSlot cardSlot;
+    public Player.CardSlot cardSlot;
 
     private bool _discarded; // when set to true, card will self terminate upon reaching destination.
-
+    private float _animStart;
 
     // Start is called before the first frame update
     void Start()
@@ -38,55 +33,27 @@ public class CardObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == null)
-        {
-            pickupCollider.enabled = true;
-            
-            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized, 
-                transform.right, rotationSpeed * Mathf.Deg2Rad * Time.deltaTime, 
-                Mathf.Infinity), Vector3.up);
+        Transform modelTarget = player.GetCardModelTarget(cardSlot);
+        
+        transform.position = Vector3.Lerp(transform.position, modelTarget.position, Time.deltaTime * handAnimSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, modelTarget.position, Time.deltaTime * handAnimSpeed/2);
+        
+        transform.localScale = Vector3.Lerp(transform.localScale,  modelTarget.localScale, Time.deltaTime * handAnimSpeed);
+        transform.localScale = Vector3.MoveTowards(transform.localScale, modelTarget.localScale, Time.deltaTime * handAnimSpeed/2);
 
-            RaycastHit hit;
-            if (!Physics.Raycast(transform.position, Vector3.down, out hit, fallSpeed * Time.deltaTime + floatHeight, LayerMask.GetMask("Terrain")))
-            {
-                transform.position += fallSpeed * Time.deltaTime * Vector3.down; 
-            }
-            else
-            {
-                transform.position = hit.point + Vector3.up * floatHeight;
-            }
-        }
-        else
+        transform.rotation = Quaternion.Lerp(transform.rotation, modelTarget.rotation, Time.deltaTime * handAnimSpeed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, modelTarget.rotation, Time.deltaTime * handAnimSpeed/2);
+        
+        if (_discarded && transform.position == modelTarget.position)
         {
-            pickupCollider.enabled = false;
-
-            transform.position = Vector3.Lerp(transform.position, player.GetCardModelTarget(cardSlot).position, Time.deltaTime * handAnimSpeed);
-            transform.position = Vector3.MoveTowards(transform.position, player.GetCardModelTarget(cardSlot).position, Time.deltaTime * handAnimSpeed * 0.01f);
-            
-            transform.localScale = Vector3.Lerp(transform.localScale, handSize * Vector3.one, Time.deltaTime * handAnimSpeed);
-            transform.localScale = Vector3.MoveTowards(transform.localScale, handSize * Vector3.one, Time.deltaTime * handAnimSpeed * 0.01f);
-            if (transform.position == player.GetCardModelTarget(cardSlot).position)
-            {
-                transform.parent = player.GetCardModelTarget(cardSlot);
-                if (_discarded)
-                {
-                    Destroy(gameObject);
-                    return;
-                }
-            }
-            transform.rotation = Quaternion.Lerp(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.deltaTime * handAnimSpeed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, player.GetCardModelTarget(cardSlot).rotation, Time.deltaTime * handAnimSpeed * 0.01f);
+            Destroy(gameObject);
+            return;
         }
     }
 
     private void OnValidate()
     {
         UpdateCard();
-    }
-
-    public void Pickup(Player user)
-    {
-        user.PickupCard(this);
     }
 
     public void UpdateCard()
@@ -115,20 +82,6 @@ public class CardObject : MonoBehaviour
     public void SetPlayer(Player playerToSet)
     {
         player = playerToSet;
-    }
-
-    public void BeSmall()
-    {
-        transform.localScale = handSize * Vector3.one;
-    }
-
-    public void Drop(Vector3 pos)
-    {
-        transform.position = pos;
-        player = null;
-        transform.parent = null;
-        cardSlot = Player.CardSlot.None;
-        transform.localScale = Vector3.one * worldSize;
     }
 
     public void Discard()

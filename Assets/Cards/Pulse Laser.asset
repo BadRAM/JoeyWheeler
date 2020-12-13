@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c9e8964e1088c4ba0e873257af315e, type: 3}
   m_Name: Pulse Laser
   m_EditorClassIdentifier: 
-  Name: Pulse Laser
+  Name: Rapid Caster
   Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
-  Description: Get a pulse laser
-  Fact: 
+  Description: 3 Damage, 30 DPS. Hitscan
+  Fact: Wizards can cast spells with their bare hands. Witches don't need to.
   Type: 0
   Tier: 1
   weapon: {fileID: 6412085962162050170, guid: b629e2ca8f0374a49968aaaba175ca8b, type: 3}

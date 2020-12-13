@@ -56,10 +56,10 @@ public class LevelGeneration : MonoBehaviour
                 {
                     if (!obj.transform.GetChild(j).CompareTag("Flat"))
                     {
-                        Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is not flat");
+                        //Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is not flat");
                         continue;
                     }
-                    Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is flat");
+                    //Debug.Log(j + " (" + obj.transform.GetChild(j).name + " tag: " + obj.transform.GetChild(j).tag + ") is flat");
                     if (j == 0)
                     {
                         moveObjectNextTo(ExitPoint.transform, obj.transform.GetChild(j));
@@ -99,7 +99,7 @@ public class LevelGeneration : MonoBehaviour
     // Moves Object next to selected exitpoint
     private void moveObjectNextTo(Transform ExitPoint, Transform obj)
     {
-        Debug.Log(ExitPoint.parent.parent.name);
+        //Debug.Log(ExitPoint.parent.parent.name);
         obj.position = ExitPoint.position;
         Transform newExit = getRandomExit(obj);
         RotateObject(ExitPoint, newExit);
@@ -155,7 +155,7 @@ public class LevelGeneration : MonoBehaviour
                 listOfNewExits.Add(child);
             }
         }
-        Debug.Log("parent of target is: " + Target.parent.name + ", count: " + listOfNewExits.Count);
+        //Debug.Log("parent of target is: " + Target.parent.name + ", count: " + listOfNewExits.Count);
         return listOfNewExits[Random.Range(0, listOfNewExits.Count)];
     }
     /// <summary>

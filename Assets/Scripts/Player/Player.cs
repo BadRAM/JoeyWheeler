@@ -14,17 +14,11 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI difficultyText;
     [SerializeField] private TextMeshProUGUI deckText;
     [SerializeField] private TextMeshProUGUI discardText;
-    [SerializeField] private TextMeshProUGUI weaponText;
     [SerializeField] private TextMeshProUGUI bossTimerText;
     [SerializeField] private TextMeshProUGUI drawTimerText;
     [SerializeField] private TextMeshProUGUI interactPrompt;
-    [SerializeField] private TextMeshProUGUI selectedCardName;
-    [SerializeField] private TextMeshProUGUI selectedCardDescription;
-    [SerializeField] private TextMeshProUGUI card1Name;
-    [SerializeField] private TextMeshProUGUI card2Name; 
-    [SerializeField] private TextMeshProUGUI card3Name;
-    [SerializeField] private TextMeshProUGUI card4Name;
-    [SerializeField] private TextMeshProUGUI card5Name;
+    [SerializeField] private Canvas packOpenPrompt;
+    [SerializeField] private Canvas packSelectPrompt;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Canvas deathScreen;
     [SerializeField] private Canvas winScreen;
@@ -46,24 +40,40 @@ public class Player : MonoBehaviour
     [HideInInspector] public Deck deck;
 
     private CardSlot _cardSlotSelected;
+    private CardPack _cardPack;
 
     private float _drawTimer;
 
-    [HideInInspector] public Transform focusedCardPos;
-    [HideInInspector] public Transform card1Pos;
-    [HideInInspector] public Transform card2Pos;
-    [HideInInspector] public Transform card3Pos;
-    [HideInInspector] public Transform card4Pos;
-    [HideInInspector] public Transform card5Pos;
-    [HideInInspector] public Transform deckPos;
-    [HideInInspector] public Transform discardPos;
+    public RectTransform packOpenPos;
+    public RectTransform focusedCardPos;
+    public RectTransform packPreview2Discard;
+    public RectTransform packPreview1;
+    public RectTransform packPreview1Discard;
+    public RectTransform packPreview3;
+    public RectTransform packPreview3Discard;
+    public RectTransform card1Pos;
+    public RectTransform card2Pos;
+    public RectTransform card3Pos;
+    public RectTransform card4Pos;
+    public RectTransform card5Pos;
+    public RectTransform deckPos;
+    public RectTransform discardPos;
     private GameObject _deckCard;
     private GameObject _discardCard;
 
     private CardObject[] _visualHand;
+    private CardObject[] _visualPack;
 
     public enum CardSlot
     {
+        PackPreview1 = -12,
+        PackDiscard1 = -11,
+        PackPreview2 = -10,
+        PackDiscard2 = -9,
+        PackPreview3 = -8,
+        PackDiscard3 = -7,
+        PackOpen = -6,
+        PackSelect = -5,
         Held = -4,
         Deck = -3,
         Discard = -2,
@@ -96,14 +106,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-//        List<Transform> spawns = new List<Transform>();
-//
-//        foreach (GameObject i in GameObject.FindGameObjectsWithTag("ScorePickupSpawn"))
-//        {
-//            spawns.Add(i.transform);
-//        }
-//        transform.position = spawns[Random.Range(0, spawns.Count-1)].position;
-        
         _walker = GetComponent<FPSWalk>();
         
         GameInfo.Player = GetComponent<Player>();
@@ -111,6 +113,8 @@ public class Player : MonoBehaviour
         _cardSlotSelected = CardSlot.None;
 
         deathScreen.enabled = false;
+        packOpenPrompt.enabled = false;
+        packSelectPrompt.enabled = false;
 
         Time.timeScale = 1;
         
@@ -127,66 +131,17 @@ public class Player : MonoBehaviour
         {
             deck = new Deck(startingDeck.Cards);
         }
-        
-        focusedCardPos = new GameObject().transform;
-        focusedCardPos.gameObject.name = "FocusedCardPos";
-        focusedCardPos.parent = raycastOrigin;
-        focusedCardPos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.5f, cam.pixelHeight * 0.5f, 0.25f));
-        focusedCardPos.rotation = raycastOrigin.rotation;
-        
-        card1Pos = new GameObject().transform;
-        card1Pos.gameObject.name = "Card1Pos";
-        card1Pos.parent = raycastOrigin;
-        card1Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.2f, cam.pixelHeight * 0.1f, 0.4f));
-        card1Pos.rotation = raycastOrigin.rotation;
-        
-        card2Pos = new GameObject().transform;
-        card2Pos.gameObject.name = "Card2Pos";
-        card2Pos.parent = raycastOrigin;
-        card2Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.35f, cam.pixelHeight * 0.1f, 0.4f));
-        card2Pos.rotation = raycastOrigin.rotation;
-        
-        card3Pos = new GameObject().transform;
-        card3Pos.gameObject.name = "Card3Pos";
-        card3Pos.parent = raycastOrigin;
-        card3Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.5f, cam.pixelHeight * 0.1f, 0.4f));
-        card3Pos.rotation = raycastOrigin.rotation;
-        
-        card4Pos = new GameObject().transform;
-        card4Pos.gameObject.name = "Card4Pos";
-        card4Pos.parent = raycastOrigin;
-        card4Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.65f, cam.pixelHeight * 0.1f, 0.4f));
-        card4Pos.rotation = raycastOrigin.rotation;
-        
-        card5Pos = new GameObject().transform;
-        card5Pos.gameObject.name = "Card5Pos";
-        card5Pos.parent = raycastOrigin;
-        card5Pos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.8f, cam.pixelHeight * 0.1f, 0.4f));
-        card5Pos.rotation = raycastOrigin.rotation;
-        
-        deckPos = new GameObject().transform;
-        deckPos.gameObject.name = "DeckPos";
-        deckPos.parent = raycastOrigin;
-        deckPos.position = cam.ScreenToWorldPoint(new Vector3( cam.pixelWidth * 0.95f, cam.pixelHeight * 0.1f, 0.5f));
-        deckPos.rotation = Quaternion.LookRotation(-raycastOrigin.forward, raycastOrigin.up);
-        
-        _deckCard = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, deckPos);
+
+        _deckCard = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, focusedCardPos.parent);
         _deckCard.GetComponent<CardObject>().SetPlayer(this);
-        _deckCard.GetComponent<CardObject>().BeSmall();
         _deckCard.GetComponent<CardObject>().SetSlot(CardSlot.Deck);
-        
-        discardPos = new GameObject().transform;
-        discardPos.gameObject.name = "DiscardPos";
-        discardPos.parent = raycastOrigin;
-        discardPos.position = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth * 0.05f, cam.pixelHeight * 0.1f, 0.5f));
-        discardPos.rotation = Quaternion.LookRotation(-raycastOrigin.forward, raycastOrigin.up);
-        
-        _discardCard = Instantiate(cardPrefab, discardPos.position, discardPos.rotation, discardPos);
+
+        _discardCard = Instantiate(cardPrefab, discardPos.position, discardPos.rotation, focusedCardPos.parent);
         _discardCard.GetComponent<CardObject>().SetPlayer(this);
-        _discardCard.GetComponent<CardObject>().BeSmall();
         _discardCard.GetComponent<CardObject>().SetSlot(CardSlot.Discard);
         
         _visualHand = new CardObject[5];
+        _visualPack = new CardObject[3];
     }
 
     // Update is called once per frame
@@ -214,35 +169,11 @@ public class Player : MonoBehaviour
             _discardCard.SetActive(true);
         }
 
-        difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
+        difficultyText.text = "cardslotselected: " + _cardSlotSelected.ToString();
+        //difficultyText.text = "Difficulty: " + GameInfo.GetDifficultyModifier();
         bossTimerText.text = "Boss spawns in: " + GameInfo.TimeToBossSpawn;
         drawTimerText.text = "Next card draw in: " + _drawTimer;
-
-//        card1Name.text = deck.GetNameOfCardInHand(0);
-//        card2Name.text = deck.GetNameOfCardInHand(1);
-//        card3Name.text = deck.GetNameOfCardInHand(2);
-//        card4Name.text = deck.GetNameOfCardInHand(3);
-//        card5Name.text = deck.GetNameOfCardInHand(4);
-
-//        if (_cardSlotSelected != CardSlot.None)
-//        {
-//            selectedCardName.text = deck.Hand[(int) _cardSlotSelected].Name;
-//            selectedCardDescription.text = deck.Hand[(int) _cardSlotSelected].Description;
-//        }
-//        else
-//        {
-//            selectedCardName.text = "";
-//            selectedCardDescription.text = "";
-//        }
         
-        if (weapon != null)
-        {
-            weaponText.text = weapon.GetWeaponName() + ", " + weapon.Ammo;
-        }
-        else
-        {
-            weaponText.text = "no weapon";
-        }
 
         RaycastHit hit;
         if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out hit, 2f, LayerMask.GetMask("UseTarget")))
@@ -314,9 +245,12 @@ public class Player : MonoBehaviour
             _drawTimer = drawInterval;
         }
 
-        _drawTimer -= Time.deltaTime;
+        if (_cardSlotSelected != CardSlot.PackOpen && _cardSlotSelected != CardSlot.PackSelect)
+        {
+            _drawTimer -= Time.deltaTime;
+        }
 
-        if (_cardSlotSelected != CardSlot.None && deck.Hand[(int)_cardSlotSelected] == null)
+        if ((int)_cardSlotSelected >= 0 && deck.Hand[(int)_cardSlotSelected] == null)
         {
             _cardSlotSelected = CardSlot.None;
         }
@@ -346,9 +280,9 @@ public class Player : MonoBehaviour
 
     private void FirePressed()
     {
-        if (_cardSlotSelected != CardSlot.None)
+        if ((int)_cardSlotSelected >= 0) // scary
         {
-            Card toPlay = deck.Hand[(int) _cardSlotSelected];
+            Card toPlay = deck.Hand[(int)_cardSlotSelected];
             deck.Discard((int)_cardSlotSelected);
             _visualHand[(int)_cardSlotSelected].SetSlot(CardSlot.Discard);
             _visualHand[(int)_cardSlotSelected].Discard();
@@ -423,7 +357,73 @@ public class Player : MonoBehaviour
 
     private void CardPressed(CardSlot cardNum)
     {
-        if (_cardSlotSelected == CardSlot.None) // select a card when none is currently selected.
+        if (_cardSlotSelected == CardSlot.PackOpen)
+        {
+            if (deck.Hand[(int)cardNum] != null)
+            {
+                _visualHand[(int)cardNum].SetSlot(CardSlot.Discard);
+                _visualHand[(int)cardNum].Discard();
+                deck.Hand[(int)cardNum] = null;
+                _cardSlotSelected = CardSlot.PackSelect;
+                cardMoveSound.Play();
+                
+                _visualPack[0].SetSlot(CardSlot.PackPreview1);
+                _visualPack[1].SetSlot(CardSlot.PackPreview2);
+                _visualPack[2].SetSlot(CardSlot.PackPreview3);
+
+                packOpenPrompt.enabled = false;
+                packSelectPrompt.enabled = true;
+            }
+        }
+        else if (_cardSlotSelected == CardSlot.PackSelect)
+        {
+            _cardSlotSelected = CardSlot.None;
+            packSelectPrompt.enabled = false;
+
+            if (cardNum == CardSlot.Card1)
+            {
+                AddCardToHand(_visualPack[0]);
+                
+                _visualPack[1].Discard();
+                _visualPack[1].SetSlot(CardSlot.PackDiscard2);
+                
+                _visualPack[2].Discard();
+                _visualPack[2].SetSlot(CardSlot.PackDiscard3);
+
+                cardMoveSound.Play();
+                return;
+            }
+            if (cardNum == CardSlot.Card2)
+            {
+                AddCardToHand(_visualPack[1]);
+
+                _visualPack[0].Discard();
+                _visualPack[0].SetSlot(CardSlot.PackDiscard1);
+                
+                _visualPack[2].Discard();
+                _visualPack[2].SetSlot(CardSlot.PackDiscard3);
+                
+                cardMoveSound.Play();
+                return;
+            }            
+            if (cardNum == CardSlot.Card3)
+            {
+                AddCardToHand(_visualPack[2]);
+                
+                _visualPack[0].Discard();
+                _visualPack[0].SetSlot(CardSlot.PackDiscard1);
+                
+                _visualPack[1].Discard();
+                _visualPack[1].SetSlot(CardSlot.PackDiscard2);
+                
+                cardMoveSound.Play();
+                return;
+            }
+
+            _cardSlotSelected = CardSlot.PackSelect;
+            packSelectPrompt.enabled = true;
+        }
+        else if (_cardSlotSelected == CardSlot.None) // select a card when none is currently selected.
         {
             if (deck.Hand[(int)cardNum] != null) // is there a card in the hand slot?
             {
@@ -458,7 +458,7 @@ public class Player : MonoBehaviour
 
     public Transform GetCardModelTarget(CardSlot card)
     {
-        if (card == _cardSlotSelected)
+        if (card == _cardSlotSelected && card != CardSlot.PackOpen)
         {
             return focusedCardPos;
         }
@@ -466,8 +466,6 @@ public class Player : MonoBehaviour
         {
             switch (card)
             {
-                case CardSlot.None:
-                    return focusedCardPos;
                 case CardSlot.Held:
                     return focusedCardPos;
                 case CardSlot.Card1:
@@ -484,6 +482,20 @@ public class Player : MonoBehaviour
                     return deckPos;
                 case CardSlot.Discard:
                     return discardPos;
+                case CardSlot.PackOpen:
+                    return packOpenPos;
+                case CardSlot.PackPreview1:
+                    return packPreview1;
+                case CardSlot.PackPreview2:
+                    return focusedCardPos;
+                case CardSlot.PackPreview3:
+                    return packPreview3;
+                case CardSlot.PackDiscard1:
+                    return packPreview1Discard;
+                case CardSlot.PackDiscard2:
+                    return packPreview2Discard;
+                case CardSlot.PackDiscard3:
+                    return packPreview3Discard;
                 default:
                     return focusedCardPos;
             }
@@ -499,21 +511,39 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PickupCard(CardObject cardObject)
+    public void PickupCardPack(CardPack cardPack)
     {
-        if (_cardSlotSelected != CardSlot.None)
-        {
-            _visualHand[(int)_cardSlotSelected].Drop(cardObject.transform.position);
-            _visualHand[(int) _cardSlotSelected] = cardObject;
-            //_visualHand[(int)_cardSlotSelected].Drop();
-            deck.Hand[(int) _cardSlotSelected] = _visualHand[(int) _cardSlotSelected].GetCard();
-
-            cardObject.transform.position = focusedCardPos.position;
-
-            cardObject.SetPlayer(this);
-            cardObject.SetSlot(CardSlot.Held);
-        }
+        _cardPack = cardPack;
+        _cardSlotSelected = CardSlot.PackOpen;
+        packOpenPrompt.enabled = true;
         
+        _visualPack[0] = Instantiate(cardPrefab, packOpenPos.position, packOpenPos.rotation, packOpenPos.parent).GetComponent<CardObject>();
+        _visualPack[0].SetPlayer(this);
+        _visualPack[0].SetCard(_cardPack.Card1);
+        _visualPack[0].SetSlot(CardSlot.PackOpen);
+                
+        _visualPack[1] = Instantiate(cardPrefab, packOpenPos.position, packOpenPos.rotation, packOpenPos.parent).GetComponent<CardObject>();
+        _visualPack[1].SetPlayer(this);
+        _visualPack[1].SetCard(_cardPack.Card2);
+        _visualPack[1].SetSlot(CardSlot.PackOpen);
+                
+        _visualPack[2] = Instantiate(cardPrefab, packOpenPos.position, packOpenPos.rotation, packOpenPos.parent).GetComponent<CardObject>();
+        _visualPack[2].SetPlayer(this);
+        _visualPack[2].SetCard(_cardPack.Card3);
+        _visualPack[2].SetSlot(CardSlot.PackOpen);
+    }
+
+    private CardSlot GetEmptyCardSlotInHand()
+    {
+        for (int i = 0; i < deck.Hand.Length; i++)
+        {
+            if (deck.Hand[i] == null)
+            {
+                return (CardSlot)i;
+            }
+        }
+
+        return CardSlot.None;
     }
 
     public void Draw()
@@ -532,12 +562,25 @@ public class Player : MonoBehaviour
             }
             deck.Undrawn.RemoveAt(0);
             
-            GameObject newCardObject = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, deckPos);
+            GameObject newCardObject = Instantiate(cardPrefab, deckPos.position, deckPos.rotation, focusedCardPos.parent);
             _visualHand[(int) slot] = newCardObject.GetComponent<CardObject>();
             _visualHand[(int) slot].SetPlayer(this);
-            _visualHand[(int) slot].BeSmall();
             _visualHand[(int) slot].SetCard(deck.Hand[(int)slot]);
             _visualHand[(int) slot].SetSlot(slot);
+        }
+    }
+
+    public void AddCardToHand(CardObject toAdd)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (deck.Hand[i] == null)
+            {
+                deck.Hand[i] = toAdd.GetCard();
+                _visualHand[i] = toAdd;
+                toAdd.SetSlot((CardSlot)i);
+                return;
+            }
         }
     }
 
@@ -551,7 +594,6 @@ public class Player : MonoBehaviour
         weapon = _weaponTransform.GetComponent<Weapon>();
         weapon.SetPlayer(this);
         weapon.SetRaycastOrigin(raycastOrigin);
-        weaponText.text = weapon.name;
         LoadWeapon();
     }
 

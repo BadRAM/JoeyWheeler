@@ -18,5 +18,5 @@ MonoBehaviour:
   Fact: Skeletal prosthesis is an easy quick fix for dismemberment, until a better
     healer can regrow the limb.
   Type: 3
-  Tier: 1
+  Tier: 2
   cardsToRestore: 4
