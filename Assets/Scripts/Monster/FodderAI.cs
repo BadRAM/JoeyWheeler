@@ -34,7 +34,7 @@ public class FodderAI : AI
             case States.Idle:
                 if (Random.Range(0, moveFrequency) < 1)
                 {
-                    _agent.SetDestination(GetCenter() + Random.insideUnitSphere * moveRadius);
+                    _agent.Warp(GetCenter() + Random.insideUnitSphere * moveRadius);
                     _target = FindNearestTarget();
                     if (_target != null && _target.Distance(_monster.GetCenter()) < visionRange)
                     {
@@ -83,7 +83,7 @@ public class FodderAI : AI
                     else
                     {
                         Fire(_target);
-                        _agent.SetDestination(transform.position);
+                        _agent.Warp(transform.position);
                     }
                 }
                 Debug.DrawLine(transform.position, _agent.destination, Color.green);

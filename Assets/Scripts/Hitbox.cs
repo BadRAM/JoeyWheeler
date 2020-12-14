@@ -25,6 +25,22 @@ public class Hitbox : MonoBehaviour
             player.Hurt((int)damage);
         }
     }
+    public void Knockback( Vector3 point)
+    {
+        trigger.Invoke();
+        
+        if (monster != null)
+        {
+            Debug.Log("knockback");
+            monster.Knockback(point);
+            return;
+        }
+
+        if (player != null)
+        {
+            //player.Knockback();
+        }
+    }
 
     public int Team()
     {
