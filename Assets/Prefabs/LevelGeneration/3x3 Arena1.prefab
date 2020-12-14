@@ -571,6 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallTexs: {fileID: 11400000, guid: 8a30594d3a1faa04094aa6b735e76702, type: 2}
   floorTexs: {fileID: 11400000, guid: 6ef607fb0b08b354b829c481a4cb83d1, type: 2}
+  MR: {fileID: 0}
 --- !u!1 &3646991943488631654
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +713,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_Range: 25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -11,6 +11,6 @@ public class MatList : ScriptableObject
 
     public Material GetRandomMat()
     {
-        return Materials[Random.Range(0, Materials.Count-1)];
+        return Materials[Random.Range(0, Materials.Count)];
     }
 }

@@ -28,8 +28,11 @@ public class Player : MonoBehaviour
     [SerializeField] private StartingDeck startingDeck;
     [SerializeField] private float drawInterval;
     [SerializeField] private SFXPool weaponLoadSound;
+    [SerializeField] private SFXPool weaponOutSound;
     [SerializeField] private SFXPool cardDrawSound;
     [SerializeField] private SFXPool cardMoveSound;
+    [SerializeField] private SFXPool cardActivateSound;
+    
 
     [HideInInspector] public Weapon weapon;
     private Transform _weaponTransform;
@@ -289,6 +292,7 @@ public class Player : MonoBehaviour
             toPlay.Activate(this, raycastOrigin);
             _cardSlotSelected = CardSlot.None;
             cardMoveSound.Play();
+            cardActivateSound.Play();
         }
         else if (weapon != null)
         {
@@ -608,5 +612,6 @@ public class Player : MonoBehaviour
     {
         weapon = null;
         _weaponTransform = null;
+        weaponOutSound.Play();
     }
 }
