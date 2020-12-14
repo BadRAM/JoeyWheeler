@@ -8,7 +8,7 @@ public static class GameInfo
 {
     public static Player Player;
     public static int Score;
-    public static float TimeToBossSpawn = 10f;
+    public static float TimeToBossSpawn = 20f;
     public static float RunTime;
     public static int LevelNumber;
     public static float Difficulty = 1;

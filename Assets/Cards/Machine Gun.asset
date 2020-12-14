@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Machine Gun
   m_EditorClassIdentifier: 
   Name: Bullet Hose
-  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  Art: {fileID: 21300000, guid: d29fa7a91fbc6914ebc9dff4b1e743af, type: 3}
   Description: 1 Damage, 20 DPS.Very inaccurate
   Fact: The reload procedure for this firearm is lost to time.
   Type: 0

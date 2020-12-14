@@ -139,6 +139,8 @@ MonoBehaviour:
   _agent: {fileID: 0}
   disableOnDeath: {fileID: 3617528238129125246}
   enableOnDeath: {fileID: 989674138751560760}
+  dropPrefab: {fileID: 6745005562050762426, guid: 1d1ddcadaf7013f4cb90287323175163, type: 3}
+  dropChance: 0.25
   _knockbackDuration: 1
 --- !u!114 &396136062225713859
 MonoBehaviour:

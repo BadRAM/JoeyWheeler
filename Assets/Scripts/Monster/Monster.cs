@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 // The core monster controller class. All monsters must have a monster script attached to them.
 // It interfaces with an AI script for behaviors, which in turn controls a weapon script which defines it's attack behaviors.
@@ -25,6 +26,8 @@ public class Monster : MonoBehaviour
     public NavMeshAgent _agent;
     [SerializeField]private GameObject disableOnDeath;
     [SerializeField]private GameObject enableOnDeath;
+    [SerializeField] private GameObject dropPrefab;
+    [SerializeField] private float dropChance;
     private bool _isPhysical = false;
     [SerializeField] private float _knockbackDuration = 1;
     private float _knockbackTimer;
@@ -90,6 +93,10 @@ public class Monster : MonoBehaviour
         _timeOfDeath = Time.time;
         disableOnDeath.SetActive(false);
         enableOnDeath.SetActive(true);
+        if (UnityEngine.Random.value < dropChance)
+        {
+            Instantiate(dropPrefab, transform.position + Vector3.up, transform.rotation);
+        }
     }
 
     public bool IsAlive()

@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8209821790376292708}
   - component: {fileID: 7147711070318675429}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86602492480871749}
   - component: {fileID: 2490206220906378929}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 167688102592869179}
   - component: {fileID: 5316636125075365838}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 398945121940818503}
   - component: {fileID: 5108883447106417290}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7010278932314269101}
   - component: {fileID: 866741953812412693}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2260098345324640318}
   - component: {fileID: 1673228064709554754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1516,7 +1516,7 @@ GameObject:
   - component: {fileID: 4424693397903960785}
   - component: {fileID: 452248152611427500}
   - component: {fileID: 178614890475816745}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 5x5Arena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1635,7 +1635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2180067594420750113}
   - component: {fileID: 8547475952230866764}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1922,7 +1922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3596985452303752759}
   - component: {fileID: 1766316394839051609}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2307,7 +2307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4423466347197640613}
   - component: {fileID: 5550093488370288402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ public class RandomTexture : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("oi m8 u got a loicense for that tex");
+//        Debug.Log("oi m8 u got a loicense for that tex");
         if (MR == null)
         {
             MR = GetComponent<Renderer>();
@@ -20,7 +20,7 @@ public class RandomTexture : MonoBehaviour
         Material[] mat = new Material[2];
         mat[0] = wallTexs.GetRandomMat();
         mat[1] = floorTexs.GetRandomMat();
-        Debug.Log("Setting " + transform.name + "'s materials to " + mat[0].name + " and " + mat[1].name);
+//        Debug.Log("Setting " + transform.name + "'s materials to " + mat[0].name + " and " + mat[1].name);
         MR.materials = mat;
     }
 }

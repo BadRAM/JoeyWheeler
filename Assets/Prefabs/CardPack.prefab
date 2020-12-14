@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6745005562050762426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 484.57147, y: 260.39114, z: 31.755001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4026, y: 0.67376, z: 0.07772603}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f282ddfd8cfdd7c49a100c8f507b680e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,6 +112,8 @@ MonoBehaviour:
   useEvent:
     m_PersistentCalls:
       m_Calls: []
+  randomize: 1
   card1: {fileID: 11400000, guid: 4924a318952d5ad4a9d41ad9b4b395d3, type: 2}
   card2: {fileID: 11400000, guid: c818b85561646cb4e8cfeb7d56692da4, type: 2}
   card3: {fileID: 11400000, guid: 8b433db9cb810a446bd55f40d505dc33, type: 2}
+  cardList: {fileID: 11400000, guid: fa993fa8097615846877f817df3417f6, type: 2}

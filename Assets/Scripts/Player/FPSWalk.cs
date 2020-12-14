@@ -245,6 +245,12 @@ public class FPSWalk : MonoBehaviour
         moveVector += _rotator.forward * _input.Player.Move.ReadValue<Vector2>()[1];
         moveVector += _rotator.right * _input.Player.Move.ReadValue<Vector2>()[0];
 
+        if (didHit && !_sliding && !_skidding && !_jumpLock && !_airJumpLock && _input.Player.Jump.ReadValue<float>() > 0.5f)
+        {
+            didHit = false;
+            Jump();
+        }
+        
 
         if (didHit)
         {

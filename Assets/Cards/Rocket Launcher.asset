@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rocket Launcher
   m_EditorClassIdentifier: 
   Name: Hand Cannon
-  Art: {fileID: 21300000, guid: 946b0b9c309e6004dbb3ee2fc8730da9, type: 3}
+  Art: {fileID: 21300000, guid: aad9a96c7b8fa5349878b3466868ba0c, type: 3}
   Description: 6 damage, Explosive.
   Fact: Point away from face.
   Type: 0
