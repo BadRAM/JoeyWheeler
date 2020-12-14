@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6658841648614011653}
   - component: {fileID: 8770046875656621333}
   - component: {fileID: 7926176221494434105}
+  - component: {fileID: 5596660428557591644}
   m_Layer: 10
   m_Name: 1x3Hall
   m_TagString: Untagged
@@ -154,7 +155,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 53eebc9f780f29146a635b65be6d0ce8, type: 3}
+  - {fileID: 2100000, guid: 009a49c17d2ff1249aa68992dc32313c, type: 2}
+  - {fileID: 2100000, guid: 2fb345662a2ade4478c8ffb9f81b5893, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,6 +192,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3740554135609913658, guid: 53eebc9f780f29146a635b65be6d0ce8, type: 3}
+--- !u!114 &5596660428557591644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438907088417413568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67bcbf29d4bf12418c77242ce809191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTexs: {fileID: 11400000, guid: 8a30594d3a1faa04094aa6b735e76702, type: 2}
+  floorTexs: {fileID: 11400000, guid: 6ef607fb0b08b354b829c481a4cb83d1, type: 2}
 --- !u!1 &4687006143927542897
 GameObject:
   m_ObjectHideFlags: 0

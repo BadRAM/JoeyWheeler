@@ -19,7 +19,7 @@ public class SFXPool : MonoBehaviour
     public void Play()
     {
         _audioSource.Stop();
-        _audioSource.clip = clips[Random.Range(0, clips.Count - 1)];
+        _audioSource.clip = clips[Random.Range(0, clips.Count)];
         _audioSource.Play();
     }
 }
