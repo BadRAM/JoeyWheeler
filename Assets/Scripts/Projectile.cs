@@ -7,7 +7,9 @@ using UnityEngine.Serialization;
 
 // TODO: Refactor this into a pure direct damage projectile class, and shift splash damage and other special properties to child classes.
 public class Projectile : MonoBehaviour
-{
+{   
+    public bool explosion = false;
+    public float explosionRadius = 20.0f;
     public float speed = 15;
     public float colliderRadius = 0.1f;
     [SerializeField] private bool hitAllies;
@@ -24,7 +26,7 @@ public class Projectile : MonoBehaviour
     private bool _alive = true;
     private Vector3 _lastpos;
     private float _startTime; // is used for timers. updates to time of death on death of projectile, for persistence timing.
-    [SerializeField] private float knockbackStrength = 200;
+    [SerializeField] private float knockbackStrength = 2;
 
     [HideInInspector] public GameObject owner;
     private int _team;
@@ -65,7 +67,7 @@ public class Projectile : MonoBehaviour
                     Debug.Log("hit a nonliving target, deactivated without dealing damage.");
                     // move the transform to the appropriate collision position
                     transform.position = hit.point + transform.forward * -colliderRadius;
-                    Collide(hit);
+                    Collide(hit.collider, hit.point);
                 }
                 else
                 {
@@ -74,7 +76,7 @@ public class Projectile : MonoBehaviour
                     {
                         // move the transform to the appropriate collision position
                         transform.position = hit.point + transform.forward * -colliderRadius;
-                        Collide(hit);
+                        Collide(hit.collider, hit.point);
                     }
                 }
             }
@@ -95,14 +97,12 @@ public class Projectile : MonoBehaviour
         }
     }
     
-    private void Collide (RaycastHit hit)
+    private void Collide (Collider hit, Vector3 point)
     {
-
-        if (hit.collider.GetComponent<Hitbox>() != null && (damageAllies || hit.collider.GetComponent<Hitbox>().Team() != _team))
+        if (hit.GetComponent<Hitbox>() != null && (damageAllies || hit.GetComponent<Hitbox>().Team() != _team))
         {
-            hit.collider.GetComponent<Hitbox>().Hurt(damage);
-            hit.collider.GetComponent<Monster>().Knockback();
-            Knockback(hit.collider.GetComponent<Rigidbody>(), hit.point);
+            hit.GetComponent<Hitbox>().Hurt(damage);
+            hit.GetComponent<Hitbox>().Knockback(point);
         }
 
         _alive = false;
@@ -111,6 +111,15 @@ public class Projectile : MonoBehaviour
         enableOnDeath.SetActive(true);
         //TrailParticles.Stop();
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        if (explosion){
+            explosion = false;
+            Collider[] hitColliders = Physics.OverlapSphere(point, explosionRadius);
+            foreach (var hitCollider in hitColliders)
+            {
+                Collide(hitCollider, point);
+            }
+            explosion = true;
+        }
     }
     
     private void Collide()
@@ -123,21 +132,10 @@ public class Projectile : MonoBehaviour
         enableOnDeath.SetActive(true);
         //TrailParticles.Stop();
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        
     }
 
     //knockback monsters
-    private void Knockback(Rigidbody _monsterRigidBody, Vector3 point)
-    {
-        //_monsterRigidBody = collision.collider.GetComponent<Rigidbody>();
-
-        if (_monsterRigidBody != null)
-        {
-            Vector3 direction = point - transform.position;
-            //direction.y = 0;
-            _monsterRigidBody.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse); // impulse allows mass to affect knockback strength
-        }
-        Debug.Log("Knockback was called");
-    }
 
 //    private void Explode(Monster excludeMonster, bool excludePlayer)
 //    {

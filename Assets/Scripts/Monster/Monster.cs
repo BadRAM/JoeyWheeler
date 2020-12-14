@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
     private EnemyWeapon _weapon;
     private AI _AI;
     private Transform _playerTransform;
-    private NavMeshAgent _agent;
+    public NavMeshAgent _agent;
     [SerializeField]private GameObject disableOnDeath;
     [SerializeField]private GameObject enableOnDeath;
     private bool _isPhysical = false;
@@ -45,7 +45,7 @@ public class Monster : MonoBehaviour
     void Update()
     {
         //Re-enable navigation after knockback duration
-        /*if (_isPhysical)
+        if (_isPhysical)
         {
             _knockbackTimer += Time.deltaTime;
             if (_knockbackTimer > _knockbackDuration && IsGrounded())
@@ -55,7 +55,7 @@ public class Monster : MonoBehaviour
                 _isPhysical = false;
                 _knockbackTimer = 0;
             }
-        }*/
+        }
     }
 
     private void FixedUpdate()
@@ -110,12 +110,23 @@ public class Monster : MonoBehaviour
     }
     
     //Disable NavMesh agent, enable physics on collision
-    public void Knockback()
+    public void Knockback(Vector3 point)
     {
+        float knockbackStrength = 20f;
+        _rigidbody = GetComponent<Rigidbody>();
         _agent.enabled = false;
         _rigidbody.isKinematic = false;
         _isPhysical = true;
         Debug.Log("collision");
+        Debug.Log(_rigidbody);
+        if (_rigidbody != null)
+        {
+            Vector3 direction = point - transform.position;
+            //direction.y = 0;
+            _rigidbody.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse); // impulse allows mass to affect knockback strength
+            Debug.Log(direction.normalized);
+        Debug.Log("Knockback was called");
+        }
     }
 
     private bool IsGrounded()

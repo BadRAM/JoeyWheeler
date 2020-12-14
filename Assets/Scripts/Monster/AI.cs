@@ -38,11 +38,18 @@ public abstract class AI : MonoBehaviour
         Vector3 targetPos = (transform.position - target.GetCenter()).normalized * 2;
         
         _agent.SetDestination(transform.position + targetPos);
+        
     }
 
     protected void ApproachTarget(AITarget target)
     {
-        _agent.SetDestination(target.GetCenter());
+        if(_agent.enabled){
+            //_agent.enabled = true;
+            _agent.SetDestination(target.GetCenter());
+        //}
+        //else{
+        //    _agent.enabled = false;
+        }
     }
 
     protected Vector3 GetCenter()
