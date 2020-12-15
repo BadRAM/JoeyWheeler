@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79bfdb8275b99146830e5eed5016119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: 1
-  explosionRadius: 20
+  explosion: 0
+  explosionRadius: 2
   speed: 25
   colliderRadius: 0.1
   hitAllies: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   persistence: 0
   enableOnDeath: {fileID: 7569646033558735653}
   disableOnDeath: {fileID: 2173335629345708171}
-  knockbackStrength: 2
+  knockbackStrength: 0.02
   owner: {fileID: 0}
 --- !u!54 &4143219593821899986
 Rigidbody:

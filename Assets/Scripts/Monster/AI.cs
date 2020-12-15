@@ -62,9 +62,11 @@ public abstract class AI : MonoBehaviour
     {
         AITarget best = null;
         List<AITarget> targets = new List<AITarget>();
+        Debug.Log("Finding target" + _monster);
         if (_monster.Team != 0)
         {
             targets.Add(new AITarget(FindObjectOfType<Player>().transform));
+            Debug.Log("Targets of "+targets[0].Name()+" found");
         }
         
         foreach (Monster i in FindObjectsOfType<Monster>())

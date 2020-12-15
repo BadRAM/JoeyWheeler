@@ -26,7 +26,8 @@ public class Monster : MonoBehaviour
     [SerializeField]private GameObject disableOnDeath;
     [SerializeField]private GameObject enableOnDeath;
     private bool _isPhysical = false;
-    [SerializeField] private float _knockbackDuration = 1;
+    [SerializeField] private float _knockbackDuration = 0.1f;
+    public float knockbackStrength = 2f;
     private float _knockbackTimer;
     private Rigidbody _rigidbody;
     private float _distanceToGround;
@@ -112,7 +113,6 @@ public class Monster : MonoBehaviour
     //Disable NavMesh agent, enable physics on collision
     public void Knockback(Vector3 point)
     {
-        float knockbackStrength = 20f;
         _rigidbody = GetComponent<Rigidbody>();
         _agent.enabled = false;
         _rigidbody.isKinematic = false;
